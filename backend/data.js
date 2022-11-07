@@ -18,7 +18,7 @@ const data = {
       category: "Shirts",
       image: "/images/makeup.jpg",
       price: 250,
-      countInStock: 20,
+      countInStock: 0,
       brand: "Adidas",
       rating: 4.0,
       numReviews: 10,
