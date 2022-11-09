@@ -17,14 +17,16 @@ function App() {
     <BrowserRouter>
       <div className="d-flex flex-column site-container">
         <header>
-          <Navbar bg="dark" varient="dark">
+          <Navbar bg="dark" varient="light">
             <Container>
               <LinkContainer to="/">
-                <Navbar.Brand>MASTER Events</Navbar.Brand>
+                <Navbar.Brand>
+                  <span className="text-light">MASTER Events</span>
+                </Navbar.Brand>
               </LinkContainer>
               <Nav className="me-auto">
                 <Link to="/cart" className="nav-link">
-                  Cart
+                  <span className="text-light">Cart</span>
                   {cart.cartItems.length > 0 && (
                     <Badge pill bg="danger">
                       {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
