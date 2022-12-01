@@ -14,6 +14,7 @@ import { Store } from "./Store";
 import CartScreen from "./screens/CartScreen";
 import SigninScreen from "./screens/SigninScreen";
 import ShippingAddressScreen from "./screens/ShippingAddressScreen";
+import SignupScreen from "./screens/SignupScreen";
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -87,7 +88,8 @@ function App() {
             <Routes>
               <Route path="/product/:slug" element={<ProductScreen />} />
               <Route path="/cart" element={<CartScreen />} />
-              <Route path="/signin" element={<SigninScreen />} />
+              <Route path="/signin" element={<SigninScreen />} />\
+              <Route path="/signup" element={<SignupScreen />} />
               <Route
                 path="/shipping"
                 element={<ShippingAddressScreen />}
@@ -96,55 +98,6 @@ function App() {
             </Routes>
           </Container>
         </main>
-
-        <footer className="bg-dark text-light">
-          <section className="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
-            <div className="me-5 d-none d-lg-block">
-              <span>Get connected with us on social networks:</span>
-            </div>
-
-            <div>
-              <a href="/" className="me-4 text-reset">
-                <i className="fab fa-facebook-f"></i>
-              </a>
-              <a href="/" className="me-4 text-reset">
-                <i className="fab fa-twitter"></i>
-              </a>
-              <a href="/" className="me-4 text-reset">
-                <i className="fab fa-instagram"></i>
-              </a>
-            </div>
-          </section>
-          <section>
-            <form action="">
-              <div className="row d-flex justify-content-center mt-5">
-                <div className="col-auto">
-                  <p className="pt-2">
-                    <strong>For more questions.. We are here for you!</strong>
-                  </p>
-                </div>
-
-                <div className="col-md-5 col-12">
-                  <div className="form-outline form-white mb-4">
-                    <input
-                      type="email"
-                      className="form-control"
-                      placeholder="Enter your Thoughts & Questions"
-                    />
-                  </div>
-                </div>
-
-                <div className="col-auto">
-                  <button type="submit" className="btn btn-outline-light mb-4">
-                    Submit
-                  </button>
-                </div>
-              </div>
-            </form>
-          </section>
-
-          <div className="text-center p-4">© 2022 Copyright: Aathi</div>
-        </footer>
       </div>
     </BrowserRouter>
   );
