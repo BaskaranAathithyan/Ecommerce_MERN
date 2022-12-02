@@ -35,71 +35,76 @@ function App() {
       <div className="d-flex flex-column site-container">
         <ToastContainer position="bottom-center" limit={1} />
         <header>
-          <Navbar bg="dark" varient="light">
+          <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
             <Container>
-              <LinkContainer to="/">
-                <Navbar.Brand>
-                  <span className="text-light">MASTER Events</span>
-                </Navbar.Brand>
-              </LinkContainer>
-              <Nav className="me-auto">
-                <Link to="/cart" className="nav-link">
-                  <span className="text-light">Cart</span>
-                  {cart.cartItems.length > 0 && (
-                    <Badge pill bg="danger">
-                      {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
-                    </Badge>
-                  )}
-                </Link>
-                {userInfo ? (
-                  <NavDropdown
-                    //className="text-light"
-                    title={userInfo.name}
-                    id="basic-nav-dropdown"
-                  >
-                    <LinkContainer to="/profile">
-                      <NavDropdown.Item>
-                        <span className="text-dark">User Profile</span>
-                      </NavDropdown.Item>
-                    </LinkContainer>
+              <Navbar.Brand href="#home">MASTER Events</Navbar.Brand>
+              <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+              <Navbar.Collapse id="responsive-navbar-nav">
+                <Nav className="me-auto">
+                  <Nav.Link to="/cart" className="nav-link">
+                    <span className="text-light">Cart</span>
+                    {cart.cartItems.length > 0 && (
+                      <Badge pill bg="danger">
+                        {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
+                      </Badge>
+                    )}
+                  </Nav.Link>
 
-                    <LinkContainer to="/orderhistory">
-                      <NavDropdown.Item>
-                        <span className="text-dark">Order History</span>
-                      </NavDropdown.Item>
-                    </LinkContainer>
-
-                    <NavDropdown.Divider />
-                    <Link
-                      className="dropdown-item"
-                      to="#signout"
-                      onClick={signoutHandler}
+                  {userInfo ? (
+                    <NavDropdown
+                      title={userInfo.name}
+                      id="collasible-nav-dropdown"
                     >
-                      <span className="text-dark">Signout</span>
+                      <LinkContainer to="/profile">
+                        <NavDropdown.Item>
+                          <span className="text-dark">User Profile</span>
+                        </NavDropdown.Item>
+                      </LinkContainer>
+
+                      <LinkContainer to="/orderhistory">
+                        <NavDropdown.Item>
+                          <span className="text-dark">Order History</span>
+                        </NavDropdown.Item>
+                      </LinkContainer>
+
+                      <NavDropdown.Divider />
+                      <Link
+                        className="dropdown-item"
+                        to="#signout"
+                        onClick={signoutHandler}
+                      >
+                        <span className="text-dark">Signout</span>
+                      </Link>
+                    </NavDropdown>
+                  ) : (
+                    <Link className="nav-link" to="/signin">
+                      <span className="text-light">Signin</span>
                     </Link>
-                  </NavDropdown>
-                ) : (
-                  <Link className="nav-link" to="/signin">
-                    <span className="text-light">Signin</span>
-                  </Link>
-                )}
-                {userInfo && userInfo.isAdmin && (
-                  <NavDropdown title="Admin" id="admin-nav-dropdown">
-                    <LinkContainer to="/admin/dashboard">
-                      <NavDropdown.Item>Dashboard</NavDropdown.Item>
-                    </LinkContainer>
-                    <LinkContainer to="/admin/productlist">
-                      <NavDropdown.Item>Products</NavDropdown.Item>
-                    </LinkContainer>
-                    <LinkContainer to="/admin/orderlist">
-                      <NavDropdown.Item>Orders</NavDropdown.Item>
-                    </LinkContainer>
-                    <LinkContainer to="/admin/userlist">
-                      <NavDropdown.Item>Users</NavDropdown.Item>
-                    </LinkContainer>
-                  </NavDropdown>
-                )}
-              </Nav>
+                  )}
+                  {userInfo && userInfo.isAdmin && (
+                    <NavDropdown title="Admin" id="admin-nav-dropdown">
+                      <LinkContainer to="/admin/dashboard">
+                        <NavDropdown.Item>Dashboard</NavDropdown.Item>
+                      </LinkContainer>
+                      <LinkContainer to="/admin/productlist">
+                        <NavDropdown.Item>Products</NavDropdown.Item>
+                      </LinkContainer>
+                      <LinkContainer to="/admin/orderlist">
+                        <NavDropdown.Item>Orders</NavDropdown.Item>
+                      </LinkContainer>
+                      <LinkContainer to="/admin/userlist">
+                        <NavDropdown.Item>Users</NavDropdown.Item>
+                      </LinkContainer>
+                    </NavDropdown>
+                  )}
+                </Nav>
+                <Nav>
+                  <Nav.Link href="#deets">More deets</Nav.Link>
+                  <Nav.Link eventKey={2} href="#memes">
+                    Dank memes
+                  </Nav.Link>
+                </Nav>
+              </Navbar.Collapse>
             </Container>
           </Navbar>
         </header>
