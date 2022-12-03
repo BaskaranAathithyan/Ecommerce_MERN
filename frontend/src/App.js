@@ -37,18 +37,28 @@ function App() {
         <header>
           <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
             <Container>
-              <Navbar.Brand href="#home">MASTER Events</Navbar.Brand>
+              <LinkContainer to="/">
+                <Navbar.Brand href="#home">MASTER Events</Navbar.Brand>
+              </LinkContainer>
               <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-              <Navbar.Collapse id="responsive-navbar-nav">
-                <Nav className="me-auto">
-                  <Nav.Link to="/cart" className="nav-link">
+              <Navbar.Collapse id="responsive-navbar-nav ">
+                <Nav className="me-auto w-100  justify-content-end">
+                  <Link to="/Aboutus" className="nav-link">
+                    <span className="text-light">About Us</span>
+                  </Link>
+
+                  <Link to="/contactus" className="nav-link">
+                    <span className="text-light">Contact Us</span>
+                  </Link>
+
+                  <Link to="/cart" className="nav-link">
                     <span className="text-light">Cart</span>
                     {cart.cartItems.length > 0 && (
                       <Badge pill bg="danger">
                         {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
                       </Badge>
                     )}
-                  </Nav.Link>
+                  </Link>
 
                   {userInfo ? (
                     <NavDropdown
@@ -98,12 +108,12 @@ function App() {
                     </NavDropdown>
                   )}
                 </Nav>
-                <Nav>
+                {/* <Nav>
                   <Nav.Link href="#deets">More deets</Nav.Link>
                   <Nav.Link eventKey={2} href="#memes">
                     Dank memes
                   </Nav.Link>
-                </Nav>
+                </Nav> */}
               </Navbar.Collapse>
             </Container>
           </Navbar>

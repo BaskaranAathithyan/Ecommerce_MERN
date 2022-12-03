@@ -10,6 +10,8 @@ import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
 import makeup from "../pics/makeup.jpg";
 import deco from "../pics/deco.jpg";
+import wedding from "../pics/wedding.jpg";
+import photoshoot from "../pics/photoshoot.jpg";
 import "../style/slider.css";
 //import data from "../data";
 
@@ -54,7 +56,7 @@ function HomeScreen() {
 
       <Carousel className="slider">
         <Carousel.Item>
-          <img className="slider" src={deco} alt="First slide" />
+          <img className="slider" src={photoshoot} alt="First slide" />
           <Carousel.Caption>
             <h3>Photography & Videography</h3>
             <p>
@@ -65,7 +67,7 @@ function HomeScreen() {
         </Carousel.Item>
 
         <Carousel.Item>
-          <img className="slider" src={makeup} alt="Second slide" />
+          <img className="slider" src={deco} alt="Second slide" />
           <Carousel.Caption>
             <h3>Decorations</h3>
             <p></p>
@@ -73,9 +75,17 @@ function HomeScreen() {
         </Carousel.Item>
 
         <Carousel.Item>
-          <img className="slider" src={deco} alt="Third slide" />
+          <img className="slider" src={makeup} alt="Third slide" />
           <Carousel.Caption>
             <h3>Bridel Makeup</h3>
+            <p></p>
+          </Carousel.Caption>
+        </Carousel.Item>
+
+        <Carousel.Item>
+          <img className="slider" src={wedding} alt="Third slide" />
+          <Carousel.Caption>
+            <h3>Wedding</h3>
             <p></p>
           </Carousel.Caption>
         </Carousel.Item>
