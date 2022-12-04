@@ -49,7 +49,7 @@ export default function ShippingAddressScreen() {
         country,
       })
     );
-    Navigate(`/payment`);
+    navigate("/payment");
   };
 
   return (
@@ -107,7 +107,7 @@ export default function ShippingAddressScreen() {
           </Form.Group>
 
           <div className="mb-3">
-            <Button variant="primary" types="submit">
+            <Button variant="dark" type="submit">
               Continue
             </Button>
           </div>

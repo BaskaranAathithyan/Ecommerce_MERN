@@ -83,7 +83,7 @@ function HomeScreen() {
         </Carousel.Item>
 
         <Carousel.Item>
-          <img className="slider" src={wedding} alt="Third slide" />
+          <img className="slider" src={wedding} alt="Fourth slide" />
           <Carousel.Caption>
             <h3>Wedding</h3>
             <p></p>

@@ -66,7 +66,9 @@ export default function SigninScreen() {
           />
         </Form.Group>
         <div className="mb-3">
-          <Button type="submit">Sign In</Button>
+          <Button type="submit" varient="dark">
+            Sign In
+          </Button>
           <Link to={`/cart?redirect=${redirect}`}></Link>
         </div>
         <div className="mb-3">

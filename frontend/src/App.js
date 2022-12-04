@@ -19,6 +19,8 @@ import AdminRoute from "./components/AdminRoute";
 import ShippingAddressScreen from "./screens/ShippingAddressScreen";
 import SignupScreen from "./screens/SignupScreen";
 import DashboardScreen from "./screens/DashboardScreen";
+//import ProductListScreen from "./screens/ProductListScreen";
+import PaymentMethodScreen from "./screens/PaymentMethodScreen";
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -28,6 +30,7 @@ function App() {
     ctxDispatch({ type: "USER_SIGNOUT" });
     localStorage.removeItem("userInfo");
     localStorage.removeItem("shippingAddress");
+    localStorage.removeItem("paymentMethod");
   };
 
   return (
@@ -96,24 +99,18 @@ function App() {
                       <LinkContainer to="/admin/dashboard">
                         <NavDropdown.Item>Dashboard</NavDropdown.Item>
                       </LinkContainer>
-                      <LinkContainer to="/admin/productlist">
+                      <LinkContainer to="/admin/products">
                         <NavDropdown.Item>Products</NavDropdown.Item>
                       </LinkContainer>
-                      <LinkContainer to="/admin/orderlist">
+                      <LinkContainer to="/admin/orders">
                         <NavDropdown.Item>Orders</NavDropdown.Item>
                       </LinkContainer>
-                      <LinkContainer to="/admin/userlist">
+                      <LinkContainer to="/admin/users">
                         <NavDropdown.Item>Users</NavDropdown.Item>
                       </LinkContainer>
                     </NavDropdown>
                   )}
                 </Nav>
-                {/* <Nav>
-                  <Nav.Link href="#deets">More deets</Nav.Link>
-                  <Nav.Link eventKey={2} href="#memes">
-                    Dank memes
-                  </Nav.Link>
-                </Nav> */}
               </Navbar.Collapse>
             </Container>
           </Navbar>
@@ -141,6 +138,14 @@ function App() {
                   </ProtectedRoute>
                 }
               ></Route>
+              <Route
+                path="/payment"
+                element={
+                  <ProtectedRoute>
+                    <PaymentMethodScreen />
+                  </ProtectedRoute>
+                }
+              ></Route>
               {/* Admin Routes */}
               <Route
                 path="/admin/dashboard"
@@ -150,6 +155,16 @@ function App() {
                   </AdminRoute>
                 }
               ></Route>
+
+              {/* <Route
+                path="/admin/products"
+                element={
+                  <AdminRoute>
+                    <ProductListScreen />
+                  </AdminRoute>
+                }
+              ></Route> */}
+
               <Route path="/" element={<HomeScreen />} />
             </Routes>
           </Container>
