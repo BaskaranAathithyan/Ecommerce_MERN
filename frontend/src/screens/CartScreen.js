@@ -46,7 +46,10 @@ export default function CartScreen() {
         <Col md={8}>
           {cartItems.length === 0 ? (
             <MessageBox>
-              Cart is empty. <Link to="/">Go Shopping</Link>
+              Dear valuable customer, Your Cart is empty.{" "}
+              <Link to="/" className="btn btn-dark">
+                Go Shopping
+              </Link>
             </MessageBox>
           ) : (
             <ListGroup>
@@ -114,7 +117,8 @@ export default function CartScreen() {
                   <div className="d-grid">
                     <Button
                       type="button"
-                      varient="primary"
+                      varient="dark"
+                      className="btn-dark"
                       onClick={checkoutHandler}
                       disabled={cartItems.length === 0}
                     >

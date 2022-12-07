@@ -125,3 +125,8 @@ main {
 button.thumbnail {
   padding: 0;
 }
+
+.logo {
+  width: 275px;
+  height: 40px;
+}

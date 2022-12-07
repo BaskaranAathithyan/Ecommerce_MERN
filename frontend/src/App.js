@@ -20,10 +20,11 @@ import ShippingAddressScreen from "./screens/ShippingAddressScreen";
 import SignupScreen from "./screens/SignupScreen";
 import DashboardScreen from "./screens/DashboardScreen";
 import OrderScreen from "./screens/OrderScreen";
-//import ProductListScreen from "./screens/ProductListScreen";
+import ProductListScreen from "./screens/ProductListScreen";
 import PaymentMethodScreen from "./screens/PaymentMethodScreen";
 import PlaceOrderScreen from "./screens/PlaceOrderScreen";
 import OrderHistoryScreen from "./screens/OrderHistoryScreen";
+import logo from "../src/pics/logo.png";
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -44,7 +45,9 @@ function App() {
           <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
             <Container>
               <LinkContainer to="/">
-                <Navbar.Brand href="#home">MASTER Events</Navbar.Brand>
+                <Navbar.Brand href="#home">
+                  <img className="logo" src={logo}></img>
+                </Navbar.Brand>
               </LinkContainer>
               <Navbar.Toggle aria-controls="responsive-navbar-nav" />
               <Navbar.Collapse id="responsive-navbar-nav ">
@@ -165,14 +168,14 @@ function App() {
                 }
               ></Route>
 
-              {/* <Route
+              <Route
                 path="/admin/products"
                 element={
                   <AdminRoute>
                     <ProductListScreen />
                   </AdminRoute>
                 }
-              ></Route> */}
+              ></Route>
 
               <Route path="/" element={<HomeScreen />} />
             </Routes>

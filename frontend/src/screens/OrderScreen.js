@@ -71,10 +71,10 @@ export default function OrderScreen() {
       <Helmet>
         <title>Order {orderId}</title>
       </Helmet>
-      <h1 className="my-3">Order {orderId}</h1>
+      <h4 className="my-3">Order ID - {orderId}</h4>
       <Row>
         <Col md={8}>
-          <Card className="mb-3">
+          <Card className="mb-3 bg-dark text-light">
             <Card.Body>
               <Card.Title>Shipping</Card.Title>
               <Card.Text>
@@ -93,7 +93,7 @@ export default function OrderScreen() {
             </Card.Body>
           </Card>
 
-          <Card className="mb-3">
+          <Card className="mb-3 bg-dark text-light">
             <Card.Body>
               <Card.Title>Payment</Card.Title>
               <Card.Text>
@@ -109,7 +109,7 @@ export default function OrderScreen() {
             </Card.Body>
           </Card>
 
-          <Card className="mb-3">
+          <Card className="mb-3 bg-dark text-light">
             <Card.Body>
               <Card.Title>Items</Card.Title>
               <ListGroup variant="flush">
@@ -137,7 +137,7 @@ export default function OrderScreen() {
         </Col>
 
         <Col md={4}>
-          <Card className="mb-3">
+          <Card className="mb-3 bg-dark text-light">
             <Card.Body>
               <Card.Title>Order Summary</Card.Title>
               <ListGroup variant="flush">

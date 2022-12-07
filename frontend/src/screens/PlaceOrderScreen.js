@@ -87,10 +87,10 @@ export default function PlaceOrderScreen() {
       <Helmet>
         <title>Preview Order</title>
       </Helmet>
-      <h1 className="my-3">Preview Order</h1>
+      <h1 className="my-3">Your Order</h1>
       <Row>
         <Col md={8}>
-          <Card className="mb-3">
+          <Card className="mb-3 bg-dark text-light">
             <Card.Body>
               <Card.Title>Shipping</Card.Title>
               <Card.Text>
@@ -99,21 +99,25 @@ export default function PlaceOrderScreen() {
                 {cart.shippingAddress.city}, {cart.shippingAddress.postalCode},
                 {cart.shippingAddress.country}
               </Card.Text>
-              <Link to="/shipping">Edit</Link>
+              <Link className="btn btn-light" to="/shipping">
+                Edit
+              </Link>
             </Card.Body>
           </Card>
 
-          <Card className="mb-3">
+          <Card className="mb-3 bg-dark text-light">
             <Card.Body>
               <Card.Title>Payment</Card.Title>
               <Card.Text>
                 <strong>Method:</strong> {cart.paymentMethod}
               </Card.Text>
-              <Link to="/payment">Edit</Link>
+              <Link className="btn btn-light" to="/payment">
+                Edit
+              </Link>
             </Card.Body>
           </Card>
 
-          <Card className="mb-3">
+          <Card className="mb-3 bg-dark text-light">
             <Card.Body>
               <Card.Title>Items</Card.Title>
               <ListGroup variant="flush">
@@ -136,13 +140,15 @@ export default function PlaceOrderScreen() {
                   </ListGroup.Item>
                 ))}
               </ListGroup>
-              <Link to="/cart">Edit</Link>
+              <Link className="btn btn-light" to="/cart">
+                Edit
+              </Link>
             </Card.Body>
           </Card>
         </Col>
 
         <Col md={3}>
-          <Card>
+          <Card className="bg-dark text-light">
             <Card.Body>
               <Card.Title>Order Summary</Card.Title>
               <ListGroup variant="flush">
