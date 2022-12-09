@@ -5,7 +5,7 @@ export default function AboutUsScreen() {
   return (
     <div>
       <div className="content">
-        <h2 className="Heading">What we Do</h2>
+        <h2 className="Heading">What we Do in 2022</h2>
         <p className="para">
           Contrary to popular belief, Lorem Ipsum is not simply random text. It
           has roots in a piece of classical Latin literature from 45 BC, making
