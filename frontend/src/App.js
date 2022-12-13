@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Link, Route } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import HomeScreen from "./screens/HomeScreen";
 import ProductScreen from "./screens/ProductScreen";
@@ -9,7 +8,8 @@ import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Container from "react-bootstrap/Container";
 import { LinkContainer } from "react-router-bootstrap";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
 import { Store } from "./Store";
 import CartScreen from "./screens/CartScreen";
 import SigninScreen from "./screens/SigninScreen";
@@ -25,6 +25,9 @@ import PaymentMethodScreen from "./screens/PaymentMethodScreen";
 import PlaceOrderScreen from "./screens/PlaceOrderScreen";
 import OrderHistoryScreen from "./screens/OrderHistoryScreen";
 import logo from "../src/pics/logo.png";
+import Button from "react-bootstrap/Button";
+import { getError } from "./utils";
+import axios from "axios";
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -37,13 +40,40 @@ function App() {
     localStorage.removeItem("paymentMethod");
   };
 
+  const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const { data } = await axios.get(`/api/products/categories`);
+        setCategories(data);
+      } catch (err) {
+        toast.error(getError(err));
+      }
+    };
+    fetchCategories();
+  }, []);
+
   return (
     <BrowserRouter>
-      <div className="d-flex flex-column site-container">
+      <div
+        className={
+          sidebarIsOpen
+            ? "d-flex flex-column site-container active-cont"
+            : "d-flex flex-column site-container"
+        }
+      >
         <ToastContainer position="bottom-center" limit={1} />
         <header>
           <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
             <Container>
+              <Button
+                varient="dark"
+                onClick={() => setSidebarIsOpen(!sidebarIsOpen)}
+              >
+                <i className="fas fa-bars"></i>
+              </Button>
               <LinkContainer to="/">
                 <Navbar.Brand href="#home">
                   <img className="logo" src={logo}></img>
@@ -52,6 +82,10 @@ function App() {
               <Navbar.Toggle aria-controls="responsive-navbar-nav" />
               <Navbar.Collapse id="responsive-navbar-nav ">
                 <Nav className="me-auto w-100  justify-content-end">
+                  <Link to="/services" className="nav-link">
+                    <span className="text-light">Services</span>
+                  </Link>
+
                   <Link to="/Aboutus" className="nav-link">
                     <span className="text-light">About Us</span>
                   </Link>
@@ -121,6 +155,29 @@ function App() {
             </Container>
           </Navbar>
         </header>
+        <div
+          className={
+            sidebarIsOpen
+              ? "active-nav side-navbar d-flex justify-content-between flex-wrap flex-column"
+              : "side-navbar d-flex justify-content-between flex-wrap flex-column"
+          }
+        >
+          <Nav className="flex-column text-white w-100 p-2">
+            <Nav.Item>
+              <strong>Categories</strong>
+            </Nav.Item>
+            {categories.map((category) => (
+              <Nav.Item key={category}>
+                <LinkContainer
+                  to={`/search?category=${category}`}
+                  onClick={() => setSidebarIsOpen(false)}
+                >
+                  <Nav.Link>{category}</Nav.Link>
+                </LinkContainer>
+              </Nav.Item>
+            ))}
+          </Nav>
+        </div>
         <main>
           <Container className="mt-3">
             <Routes>
