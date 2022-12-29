@@ -12,6 +12,7 @@ body {
 main {
   flex: 1;
 }
+
 .btn-primary,
 .btn-outline-primary {
   background-color: #0cbedd;
@@ -71,7 +72,7 @@ main {
 }
 
 .site-container {
-  transition: 0.4s;
+  transition: 0.6s;
 }
 .active-cont {
   margin-left: 240px;
