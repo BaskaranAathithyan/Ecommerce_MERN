@@ -7,3 +7,5 @@ export default function AdminRoute({ children }) {
   const { userInfo } = state;
   return userInfo && userInfo.isAdmin ? children : <Navigate to="signin" />;
 }
+
+//admin route
