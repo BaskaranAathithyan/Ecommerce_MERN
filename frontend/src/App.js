@@ -225,7 +225,22 @@ function App() {
                   </AdminRoute>
                 }
               ></Route>
-
+              {/* <Route
+                path="/admin/orders"
+                element={
+                  <AdminRoute>
+                    <OrderListScreen />
+                  </AdminRoute>
+                }
+              ></Route>
+              <Route
+                path="/admin/users"
+                element={
+                  <AdminRoute>
+                    <UserListScreen />
+                  </AdminRoute>
+                }
+              ></Route> */}
               <Route
                 path="/admin/products"
                 element={
