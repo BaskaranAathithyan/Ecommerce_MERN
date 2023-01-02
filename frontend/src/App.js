@@ -20,6 +20,7 @@ import ShippingAddressScreen from "./screens/ShippingAddressScreen";
 import SignupScreen from "./screens/SignupScreen";
 import DashboardScreen from "./screens/DashboardScreen";
 import OrderScreen from "./screens/OrderScreen";
+import AboutUsScreen from "./screens/AboutUsScreen";
 import ProductListScreen from "./screens/ProductListScreen";
 import PaymentMethodScreen from "./screens/PaymentMethodScreen";
 import PlaceOrderScreen from "./screens/PlaceOrderScreen";
@@ -85,14 +86,9 @@ function App() {
               </LinkContainer>
               <Navbar.Toggle aria-controls="responsive-navbar-nav" />
               <Navbar.Collapse id="responsive-navbar-nav ">
-                <SearchBox />
                 <Nav className="me-auto w-100  justify-content-end">
                   <Link to="/Aboutus" className="nav-link">
                     <span className="text-light">About Us</span>
-                  </Link>
-
-                  <Link to="/contactus" className="nav-link">
-                    <span className="text-light">Contact Us</span>
                   </Link>
 
                   <Link to="/cart" className="nav-link">
@@ -155,6 +151,7 @@ function App() {
               </Navbar.Collapse>
             </Container>
           </Navbar>
+          <SearchBox />
         </header>
         <div
           className={
@@ -189,6 +186,8 @@ function App() {
               <Route path="/placeorder" element={<PlaceOrderScreen />} />
               <Route path="/order/:id" element={<OrderScreen />} />
               <Route path="/search" element={<SearchScreen />} />
+              <Route path="/Aboutus" element={<AboutUsScreen />} />
+
               <Route
                 path="/orderhistory"
                 element={<OrderHistoryScreen />}
