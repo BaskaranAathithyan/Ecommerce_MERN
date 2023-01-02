@@ -32,6 +32,7 @@ import axios from "axios";
 import SearchBox from "./components/SearchBox";
 import SearchScreen from "./screens/SearchScreen";
 import ProductEditScreen from "./screens/ProductEditScreen";
+import OrderListScreen from "./screens/OrderListScreen";
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -233,7 +234,7 @@ function App() {
                   </AdminRoute>
                 }
               ></Route>
-              {/* <Route
+              <Route
                 path="/admin/orders"
                 element={
                   <AdminRoute>
@@ -241,7 +242,7 @@ function App() {
                   </AdminRoute>
                 }
               ></Route>
-              <Route
+              {/* <Route
                 path="/admin/users"
                 element={
                   <AdminRoute>
