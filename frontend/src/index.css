@@ -9,6 +9,11 @@ body {
 .site-container {
   min-height: 100vh;
 }
+.backgrounds {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
 main {
   flex: 1;
 }
@@ -62,19 +67,19 @@ main {
   font-weight: bold;
 }
 .side-navbar {
-  width: 240px;
+  width: 200px;
   height: 100%;
   position: absolute;
   left: -300px;
   background-color: #100901;
-  transition: 0.5s;
+  transition: 0.8s;
 }
 
 .site-container {
   transition: 0.4s;
 }
 .active-cont {
-  margin-left: 240px;
+  margin-left: 200px;
 }
 .active-nav {
   left: 0;

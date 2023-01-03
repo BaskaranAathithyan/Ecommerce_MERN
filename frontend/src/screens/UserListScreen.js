@@ -102,7 +102,7 @@ export default function UserListScreen() {
       ) : error ? (
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
-        <table className="table">
+        <table className="table" varient="dark">
           <thead>
             <tr>
               <th>ID</th>

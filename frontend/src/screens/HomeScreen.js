@@ -12,6 +12,7 @@ import makeup from "../pics/makeup.jpg";
 import deco from "../pics/deco.jpg";
 import wedding from "../pics/wedding.jpg";
 import photoshoot from "../pics/photoshoot.jpg";
+import bg from "../pics/bg.jpg";
 import "../style/slider.css";
 //import data from "../data";
 
@@ -53,8 +54,10 @@ function HomeScreen() {
       <Helmet>
         <title>MASTER Events</title>
       </Helmet>
-
-      <Carousel className="slider">
+      <div>
+        <img className="backgrounds" src={bg}></img>
+      </div>
+      {/* <Carousel className="slider">
         <Carousel.Item>
           <img className="slider" src={photoshoot} alt="First slide" />
           <Carousel.Caption>
@@ -89,11 +92,11 @@ function HomeScreen() {
             <p></p>
           </Carousel.Caption>
         </Carousel.Item>
-      </Carousel>
+      </Carousel> */}
       <p></p>
       <p></p>
 
-      <h3>Popular Products</h3>
+      <h3>Our Collections</h3>
       <div className="products">
         {loading ? (
           <LoadingBox />
