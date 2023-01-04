@@ -136,18 +136,20 @@ button.thumbnail {
   height: 40px;
 }
 
+/* Chatbox */
 .chatbox {
   color: #000000;
   position: fixed;
   right: 1rem;
   bottom: 1rem;
+  width: 30%;
 }
 .chatbox ul {
   overflow: scroll;
-  max-height: 20rem;
+  max-height: 30rem;
 }
 .chatbox li {
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 .chatbox input {
   width: calc(100% - 9rem);
@@ -212,9 +214,41 @@ button.thumbnail {
 
 .custom {
   margin-bottom: 10px;
+  background-color: #298eb6;
 }
 
 .custom:hover {
   color: #298eb6;
   background-color: #ffffff;
+}
+
+.supportbtn {
+  background-color: #ffffff;
+  margin-left: 350px;
+  border-radius: 180px;
+  padding: 10px;
+  border: solid 1px;
+}
+
+.closebtn {
+  width: 30px;
+  height: 30px;
+  padding: 1px;
+  size: 10px;
+  border-radius: 35px;
+}
+
+.txtmessage {
+  margin-left: 40px;
+  border-radius: 15px;
+  margin-bottom: 5px;
+}
+
+.sendbtn {
+  width: 80px;
+  height: 30px;
+  padding: 1px;
+  size: 10px;
+  border-radius: 15px;
+  margin-left: 5px;
 }

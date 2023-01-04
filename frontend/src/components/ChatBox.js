@@ -1,5 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import socketIOClient from "socket.io-client";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Button from "react-bootstrap/Button";
 
 const ENDPOINT =
   window.location.host.indexOf("localhost") >= 0
@@ -65,17 +68,27 @@ export default function ChatBox(props) {
   return (
     <div className="chatbox">
       {!isOpen ? (
-        <button type="button" onClick={supportHandler}>
-          <i className="fa fa-support" />
+        <button className="supportbtn" type="button" onClick={supportHandler}>
+          <i class="far fa-solid fa-comments fa-3x"></i>
         </button>
       ) : (
         <div className="card card-body">
-          <div className="row">
-            <strong>Support </strong>
-            <button type="button" onClick={closeHandler}>
-              <i className="fa fa-close" />
-            </button>
-          </div>
+          <Row>
+            <Col md={10}>
+              <strong>Our Support !</strong>
+            </Col>
+            <Col md={2}>
+              <Button
+                className="closebtn"
+                type="submit"
+                varient="light"
+                onClick={closeHandler}
+              >
+                X
+              </Button>
+            </Col>
+          </Row>
+
           <ul ref={uiMessagesRef}>
             {messages.map((msg, index) => (
               <li key={index}>
@@ -86,12 +99,16 @@ export default function ChatBox(props) {
           <div>
             <form onSubmit={submitHandler} className="row">
               <input
+                className="txtmessage"
                 value={messageBody}
                 onChange={(e) => setMessageBody(e.target.value)}
                 type="text"
-                placeholder="type message"
+                placeholder="Type your message..."
               />
-              <button type="submit">Send</button>
+
+              <Button className="sendbtn" type="submit" varient="light">
+                Send
+              </Button>
             </form>
           </div>
         </div>
