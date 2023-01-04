@@ -35,6 +35,9 @@ import ProductEditScreen from "./screens/ProductEditScreen";
 import OrderListScreen from "./screens/OrderListScreen";
 import UserListScreen from "./screens/UserListScreen";
 import UserEditScreen from "./screens/UserEditScreen";
+import SupportScreen from "./screens/SupportScreen";
+import ChatBox from "./components/ChatBox";
+import CustomOrderScreen from "./screens/CustomOrderScreen";
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -148,6 +151,9 @@ function App() {
                       <LinkContainer to="/admin/users">
                         <NavDropdown.Item>Users</NavDropdown.Item>
                       </LinkContainer>
+                      <LinkContainer to="/admin/support">
+                        <NavDropdown.Item>Support</NavDropdown.Item>
+                      </LinkContainer>
                     </NavDropdown>
                   )}
                 </Nav>
@@ -190,7 +196,7 @@ function App() {
               <Route path="/order/:id" element={<OrderScreen />} />
               <Route path="/search" element={<SearchScreen />} />
               <Route path="/Aboutus" element={<AboutUsScreen />} />
-
+              <Route path="/customorders" element={<CustomOrderScreen />} />
               <Route
                 path="/orderhistory"
                 element={<OrderHistoryScreen />}
@@ -253,6 +259,22 @@ function App() {
                 }
               ></Route>
               <Route
+                path="/admin/dashboard"
+                element={
+                  <AdminRoute>
+                    <DashboardScreen />
+                  </AdminRoute>
+                }
+              ></Route>
+              <Route
+                path="/admin/support"
+                element={
+                  <AdminRoute>
+                    <SupportScreen />
+                  </AdminRoute>
+                }
+              ></Route>
+              <Route
                 path="/admin/user/:id"
                 element={
                   <AdminRoute>
@@ -273,6 +295,9 @@ function App() {
             </Routes>
           </Container>
         </main>
+        <footer className="row center">
+          {userInfo && !userInfo.isAdmin && <ChatBox userInfo={userInfo} />}{" "}
+        </footer>
       </div>
     </BrowserRouter>
   );

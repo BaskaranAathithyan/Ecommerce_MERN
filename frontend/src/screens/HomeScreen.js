@@ -8,11 +8,9 @@ import Product from "../components/Product";
 import Carousel from "react-bootstrap/Carousel";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
-import makeup from "../pics/makeup.jpg";
-import deco from "../pics/deco.jpg";
-import wedding from "../pics/wedding.jpg";
-import photoshoot from "../pics/photoshoot.jpg";
+import Button from "react-bootstrap/Button";
 import bg from "../pics/bg.jpg";
+import { useNavigate } from "react-router-dom";
 import "../style/slider.css";
 //import data from "../data";
 
@@ -30,6 +28,7 @@ const reducer = (state, action) => {
 };
 
 function HomeScreen() {
+  const navigate = useNavigate();
   const [{ loading, error, products }, dispatch] = useReducer(logger(reducer), {
     products: [],
     loading: true,
@@ -49,11 +48,24 @@ function HomeScreen() {
     fetchData();
   }, []);
 
+  const customHandler = () => {
+    navigate(`/customorders`);
+  };
+
   return (
     <div>
       <Helmet>
         <title>MASTER Events</title>
       </Helmet>
+      <Button
+        type="button"
+        varient="dark"
+        className="custom"
+        onClick={customHandler}
+      >
+        Customize Your needs
+      </Button>
+
       <div>
         <img className="backgrounds" src={bg}></img>
       </div>
