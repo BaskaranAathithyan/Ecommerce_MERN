@@ -252,3 +252,46 @@ button.thumbnail {
   border-radius: 15px;
   margin-left: 5px;
 }
+
+.writereview {
+  margin-top: 50px;
+  padding: 15px;
+}
+
+.productlarge {
+  width: 80%;
+  transition: 0.5s all ease-in-out;
+}
+
+.productlarge:hover {
+  transform: scale(1.2);
+}
+
+.zoomimg {
+  width: 800px;
+  height: 500px;
+}
+
+.cardname {
+  text-decoration: none;
+  color: #100901;
+}
+
+.signinbtn {
+  background-color: #0cbedd;
+  border-radius: 8px;
+  padding-bottom: 5px;
+  padding-top: 3px;
+  padding-left: 8px;
+  padding-right: 8px;
+  text-decoration: none;
+  color: #000000;
+  size: 5px;
+}
+
+.cardDesign {
+  background-color: #404040;
+  color: white;
+  align-items: center;
+  text-align: center;
+}

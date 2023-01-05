@@ -53,7 +53,8 @@ export default function DashboardScreen() {
 
   return (
     <div>
-      <h1>Dashboard</h1>
+      <h2>Welcome {userInfo.name} !</h2>
+
       {loading ? (
         <LoadingBox />
       ) : error ? (
@@ -62,39 +63,39 @@ export default function DashboardScreen() {
         <>
           <Row>
             <Col md={4}>
-              <Card>
+              <Card className="cardDesign">
                 <Card.Body>
+                  <Card.Text> Users</Card.Text>
                   <Card.Title>
                     {summary.users && summary.users[0]
                       ? summary.users[0].numUsers
                       : 0}
                   </Card.Title>
-                  <Card.Text> Users</Card.Text>
                 </Card.Body>
               </Card>
             </Col>
             <Col md={4}>
-              <Card>
+              <Card className="cardDesign">
                 <Card.Body>
+                  <Card.Text> Orders</Card.Text>
                   <Card.Title>
                     {summary.orders && summary.users[0]
                       ? summary.orders[0].numOrders
                       : 0}
                   </Card.Title>
-                  <Card.Text> Orders</Card.Text>
                 </Card.Body>
               </Card>
             </Col>
             <Col md={4}>
-              <Card>
+              <Card className="cardDesign">
                 <Card.Body>
+                  <Card.Text> Orders Amount</Card.Text>
                   <Card.Title>
-                    $
+                    Rs .
                     {summary.orders && summary.users[0]
                       ? summary.orders[0].totalSales.toFixed(2)
                       : 0}
                   </Card.Title>
-                  <Card.Text> Orders</Card.Text>
                 </Card.Body>
               </Card>
             </Col>

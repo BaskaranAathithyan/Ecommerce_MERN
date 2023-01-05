@@ -186,7 +186,7 @@ function App() {
           </Nav>
         </div>
         <main>
-          <Container className="mt-3">
+          <Container className="mt-1">
             <Routes>
               <Route path="/product/:slug" element={<ProductScreen />} />
               <Route path="/cart" element={<CartScreen />} />

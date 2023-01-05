@@ -73,7 +73,9 @@ export default function SigninScreen() {
         </div>
         <div className="mb-3">
           New customer?{" "}
-          <Link to={`/signup?redirect=${redirect}`}>Create your account</Link>
+          <Link className="signinbtn" to={`/signup?redirect=${redirect}`}>
+            Create your account
+          </Link>
         </div>
       </Form>
     </Container>

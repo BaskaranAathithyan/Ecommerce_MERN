@@ -41,7 +41,7 @@ export default function CartScreen() {
       <Helmet>
         <title>Shopping Cart</title>
       </Helmet>
-      <h1>Shopping Cart</h1>
+      <h2>Shopping Cart</h2>
       <Row>
         <Col md={8}>
           {cartItems.length === 0 ? (
@@ -56,13 +56,15 @@ export default function CartScreen() {
               {cartItems.map((item) => (
                 <ListGroup.Item key={item._id}>
                   <Row className="align-items-center">
-                    <Col md={4}>
+                    <Col md={6}>
                       <img
                         src={item.image}
                         alt={item.name}
                         className="img-fluid rounded img-thumbnail"
                       ></img>{" "}
-                      <Link to={`/product/${item.slug}`}>{item.name}</Link>
+                      <Link className="cardname" to={`/product/${item.slug}`}>
+                        {item.name}
+                      </Link>
                     </Col>
                     <Col md={3}>
                       <Button
@@ -87,8 +89,8 @@ export default function CartScreen() {
                         <i className="fas fa-plus-circle"></i>
                       </Button>
                     </Col>
-                    <Col md={3}>Rs{item.price}</Col>
-                    <Col md={2}>
+                    <Col md={2}>Rs{item.price}</Col>
+                    <Col md={1}>
                       <Button
                         onClick={() => removeItemHandler(item)}
                         varient="light"

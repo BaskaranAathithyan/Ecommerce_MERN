@@ -34,8 +34,8 @@ function Product(props) {
         <img src={product.image} className="card-img-top" alt={product.name} />
       </Link>
       <Card.Body>
-        <Link to={`/product/${product.slug}`}>
-          <Card.Title>{product.name}</Card.Title>
+        <Link className="cardname" to={`/product/${product.slug}`}>
+          <Card.Title className="cardname">{product.name}</Card.Title>
         </Link>
         <Rating rating={product.rating} numReviews={product.numReviews} />
         <Card.Text>Rs {product.price}</Card.Text>
