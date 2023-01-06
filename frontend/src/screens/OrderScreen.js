@@ -197,7 +197,7 @@ export default function OrderScreen() {
   ) : error ? (
     <MessageBox varient="danger">{error}</MessageBox>
   ) : (
-    <div>
+    <div className="marginAll">
       <Helmet>
         <title>Order {orderId}</title>
       </Helmet>

@@ -53,7 +53,7 @@ export default function ShippingAddressScreen() {
   };
 
   return (
-    <div>
+    <div className="marginAll">
       <Helmet>
         <title>Shipping Address</title>
       </Helmet>

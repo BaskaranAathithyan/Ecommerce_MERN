@@ -52,7 +52,7 @@ export default function OrderHistoryScreen() {
   }, [userInfo]);
 
   return (
-    <div>
+    <div className="marginAll">
       <Helmet>
         <title>Order History</title>
       </Helmet>

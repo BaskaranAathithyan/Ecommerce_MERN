@@ -37,7 +37,7 @@ export default function CartScreen() {
     navigate("/signin?redirect=/shipping");
   };
   return (
-    <div>
+    <div className="marginAll">
       <Helmet>
         <title>Shopping Cart</title>
       </Helmet>

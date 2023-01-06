@@ -52,7 +52,7 @@ export default function DashboardScreen() {
   }, [userInfo]);
 
   return (
-    <div>
+    <div className="marginAll">
       <h2>Welcome {userInfo.name} !</h2>
 
       {loading ? (
@@ -110,7 +110,7 @@ export default function DashboardScreen() {
                   <Chart
                     width="90%"
                     height="400px"
-                    chartType="BarChart"
+                    chartType="Bar"
                     loader={<div>Loading Chart...</div>}
                     data={[
                       ["Date", "Sales"],

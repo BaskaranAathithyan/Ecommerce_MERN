@@ -91,7 +91,7 @@ export default function UserListScreen() {
   };
 
   return (
-    <div>
+    <div className="marginAll">
       <Helmet>
         <title>Users</title>
       </Helmet>

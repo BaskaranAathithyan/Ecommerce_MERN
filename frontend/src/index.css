@@ -13,6 +13,7 @@ body {
   margin: 0;
   padding: 0;
   width: 100%;
+  height: 500px;
 }
 main {
   flex: 1;
@@ -215,6 +216,7 @@ button.thumbnail {
 .custom {
   margin-bottom: 10px;
   background-color: #298eb6;
+  margin-left: 50px;
 }
 
 .custom:hover {
@@ -298,4 +300,18 @@ button.thumbnail {
 
 .chartdesign {
   margin-top: 20px;
+}
+
+.marginAll {
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+.procard {
+  margin-bottom: 15px;
+  padding: 10px;
+}
+
+.procard:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }

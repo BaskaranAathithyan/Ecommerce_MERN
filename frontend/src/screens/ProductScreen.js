@@ -123,7 +123,7 @@ function ProductScreen() {
   ) : error ? (
     <MessageBox varient="danger">{error}</MessageBox>
   ) : (
-    <div>
+    <div className="marginAll">
       <Row>
         <Col md={6}>
           <div className="zoomimg">

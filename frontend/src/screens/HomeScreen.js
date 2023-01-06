@@ -108,8 +108,8 @@ function HomeScreen() {
       <p></p>
       <p></p>
 
-      <h3>Our Collections</h3>
-      <div className="products">
+      <h3 className="marginAll">Our Collections</h3>
+      <div className="products marginAll">
         {loading ? (
           <LoadingBox />
         ) : error ? (
