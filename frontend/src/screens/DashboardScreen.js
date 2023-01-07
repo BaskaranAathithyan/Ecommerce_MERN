@@ -62,7 +62,7 @@ export default function DashboardScreen() {
       ) : (
         <>
           <Row>
-            <Col md={4}>
+            <Col md={3}>
               <Card className="cardDesign">
                 <Card.Body>
                   <Card.Text> Users</Card.Text>
@@ -74,7 +74,7 @@ export default function DashboardScreen() {
                 </Card.Body>
               </Card>
             </Col>
-            <Col md={4}>
+            <Col md={3}>
               <Card className="cardDesign">
                 <Card.Body>
                   <Card.Text> Orders</Card.Text>
@@ -86,7 +86,15 @@ export default function DashboardScreen() {
                 </Card.Body>
               </Card>
             </Col>
-            <Col md={4}>
+            <Col md={3}>
+              <Card className="cardDesign">
+                <Card.Body>
+                  <Card.Text> Categories</Card.Text>
+                  <Card.Title>{summary.productCategories[0].count}</Card.Title>
+                </Card.Body>
+              </Card>
+            </Col>
+            <Col md={3}>
               <Card className="cardDesign">
                 <Card.Body>
                   <Card.Text> Orders Amount</Card.Text>
