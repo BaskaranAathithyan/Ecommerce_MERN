@@ -90,7 +90,7 @@ export default function DashboardScreen() {
               <Card className="cardDesign">
                 <Card.Body>
                   <Card.Text> Categories</Card.Text>
-                  <Card.Title>{summary.productCategories[0].count}</Card.Title>
+                  <Card.Title>{summary.productCategories[4].count}</Card.Title>
                 </Card.Body>
               </Card>
             </Col>
