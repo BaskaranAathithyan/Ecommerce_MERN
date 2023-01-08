@@ -39,6 +39,10 @@ userRouter.put(
     if (user) {
       user.name = req.body.name || user.name;
       user.email = req.body.email || user.email;
+      user.mobileNo = req.body.mobileNo || user.mobileNo;
+      user.city = req.body.city || user.city;
+      user.address = req.body.address || user.address;
+      //user.image = req.body.image || user.image;
       user.isAdmin = Boolean(req.body.isAdmin);
       const updatedUser = await user.save();
       res.send({ message: "User Updated", user: updatedUser });
@@ -78,6 +82,10 @@ userRouter.post(
           name: user.name,
           password: user.password,
           email: user.email,
+          mobileNo: user.mobileNo,
+          city: user.city,
+          address: user.address,
+          //image: user.image,
           isAdmin: user.isAdmin,
           token: generateToken(user),
         });
@@ -94,6 +102,10 @@ userRouter.post(
     const newUser = new User({
       name: req.body.name,
       email: req.body.email,
+      mobileNo: req.body.mobileNo,
+      city: req.body.city,
+      address: req.body.address,
+      //image: req.body.image,
       password: bcrypt.hashSync(req.body.password),
     });
     const user = await newUser.save();
@@ -102,6 +114,10 @@ userRouter.post(
       name: user.name,
       password: user.password,
       email: user.email,
+      mobileNo: user.mobileNo,
+      city: user.city,
+      address: user.address,
+      //image: user.image,
       isAdmin: user.isAdmin,
       token: generateToken(user),
     });
@@ -116,6 +132,10 @@ userRouter.put(
     if (user) {
       user.name = req.body.name || user.name;
       user.email = req.body.email || user.email;
+      user.city = req.body.city || user.city;
+      user.address = req.body.address || user.address;
+      //user.image = req.body.image || user.image;
+      user.mobileNo = req.body.mobileNo || user.mobileNo;
       if (req.body.password) {
         user.password = bcrypt.hashSync(req.body.password, 8);
       }
@@ -126,6 +146,10 @@ userRouter.put(
         name: updatedUser.name,
         email: updatedUser.email,
         isAdmin: updatedUser.isAdmin,
+        mobileNo: updatedUser.mobileNo,
+        city: updatedUser.city,
+        address: updatedUser.address,
+        //image: updatedUser.image,
         token: generateToken(updatedUser),
       });
     } else {

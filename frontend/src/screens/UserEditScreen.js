@@ -45,6 +45,10 @@ export default function UserEditScreen() {
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [mobileNo, setMobileNo] = useState("");
+  const [city, setCity] = useState("");
+  const [address, setAddress] = useState("");
+  //const [image, setImage] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
@@ -56,6 +60,10 @@ export default function UserEditScreen() {
         });
         setName(data.name);
         setEmail(data.email);
+        setMobileNo(data.mobileNo);
+        setCity(data.city);
+        setAddress(data.address);
+        //setImage(data.image);
         setIsAdmin(data.isAdmin);
         dispatch({ type: "FETCH_SUCCESS" });
       } catch (err) {
@@ -94,7 +102,9 @@ export default function UserEditScreen() {
       <Helmet>
         <title>Edit User ${userId}</title>
       </Helmet>
-      <h1>Edit User {userId}</h1>
+      <h2>
+        Edit User <h6>({userId})</h6>{" "}
+      </h2>
 
       {loading ? (
         <LoadingBox></LoadingBox>
@@ -116,6 +126,35 @@ export default function UserEditScreen() {
               value={email}
               type="email"
               onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="mobileno">
+            <Form.Label>Mobile No</Form.Label>
+            <Form.Control
+              value={mobileNo}
+              type="mobileNo"
+              onChange={(e) => setMobileNo(e.target.value)}
+              required
+            />
+          </Form.Group>
+
+          <Form.Group className="mb-3" controlId="mobileno">
+            <Form.Label>City</Form.Label>
+            <Form.Control
+              value={city}
+              type="mobileNo"
+              onChange={(e) => setCity(e.target.value)}
+              required
+            />
+          </Form.Group>
+
+          <Form.Group className="mb-3" controlId="mobileno">
+            <Form.Label>Address</Form.Label>
+            <Form.Control
+              value={address}
+              type="mobileNo"
+              onChange={(e) => setAddress(e.target.value)}
               required
             />
           </Form.Group>

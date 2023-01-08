@@ -18,6 +18,10 @@ export default function SignupScreen() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [mobileNo, setMobileNo] = useState("");
+  const [city, setCity] = useState("");
+  const [address, setAddress] = useState("");
+  //const [image, setImage] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -32,6 +36,10 @@ export default function SignupScreen() {
       const { data } = await Axios.post(`/api/users/signup`, {
         name,
         email,
+        mobileNo,
+        city,
+        address,
+
         password,
       });
       ctxDispatch({ type: "USER_SIGNIN", payload: data });
@@ -68,6 +76,48 @@ export default function SignupScreen() {
             onChange={(e) => setEmail(e.target.value)}
           />
         </Form.Group>
+
+        <Form.Group className="mb-3" controlId="mobileno">
+          <Form.Label>Mobile No</Form.Label>
+          <Form.Control
+            type="mobileno"
+            required
+            onChange={(e) => setMobileNo(e.target.value)}
+          />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="city">
+          <Form.Label>City</Form.Label>
+          <Form.Control
+            type="city"
+            required
+            onChange={(e) => setCity(e.target.value)}
+          />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="address">
+          <Form.Label>Address</Form.Label>
+          <Form.Control
+            type="address"
+            required
+            onChange={(e) => setAddress(e.target.value)}
+          />
+        </Form.Group>
+
+        {/* <Form.Group className="mb-3" controlId="image">
+          <Form.Label>Image File</Form.Label>
+          <Form.Control
+            value={image}
+            onChange={(e) => setImage(e.target.value)}
+            required
+          />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="imageFile">
+          <Form.Label>Upload Image</Form.Label>
+          <Form.Control type="file" />
+        </Form.Group> */}
+
         <Form.Group className="mb-3" controlId="password">
           <Form.Label>Password</Form.Label>
           <Form.Control

@@ -26,12 +26,20 @@ export default function ProfileScreen() {
   const { userInfo } = state;
   const [name, setName] = useState(userInfo.name);
   const [email, setEmail] = useState(userInfo.email);
+  const [mobileNo, setMobileNo] = useState(userInfo.mobileNo);
+  const [city, setCity] = useState(userInfo.city);
+  const [address, setAddress] = useState(userInfo.address);
+  //const [image, setImage] = useState(userInfo.image);
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const [{ loadingUpdate }, dispatch] = useReducer(reducer, {
-    loadingUpdate: false,
-  });
+  const [{ loadingUpdate, error, loadingUpload }, dispatch] = useReducer(
+    reducer,
+    {
+      loadingUpdate: false,
+      error: "",
+    }
+  );
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -41,6 +49,10 @@ export default function ProfileScreen() {
         {
           name,
           email,
+          mobileNo,
+          city,
+          address,
+          //image,
           password,
         },
         {
@@ -60,6 +72,28 @@ export default function ProfileScreen() {
       toast.error(getError(err));
     }
   };
+
+  /*  const uploadFileHandler = async (e) => {
+    const file = e.target.files[0];
+    const bodyFormData = new FormData();
+    bodyFormData.append("file", file);
+    try {
+      dispatch({ type: "UPLOAD_REQUEST" });
+      const { data } = await axios.post("/api/upload", bodyFormData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          authorization: `Bearer ${userInfo.token}`,
+        },
+      });
+      dispatch({ type: "UPLOAD_SUCCESS" });
+
+      toast.success("Image uploaded successfully");
+      setImage(data.secure_url);
+    } catch (err) {
+      toast.error(getError(err));
+      dispatch({ type: "UPLOAD_FAIL", payload: getError(err) });
+    }
+  }; */
 
   return (
     <div className="container small-container">
@@ -85,6 +119,51 @@ export default function ProfileScreen() {
             required
           />
         </Form.Group>
+        <Form.Group className="mb-3" controlId="name">
+          <Form.Label>Mobile No</Form.Label>
+          <Form.Control
+            type="mobileno"
+            value={mobileNo}
+            onChange={(e) => setMobileNo(e.target.value)}
+            required
+          />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="name">
+          <Form.Label>City</Form.Label>
+          <Form.Control
+            type="city"
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+            required
+          />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="name">
+          <Form.Label>Address</Form.Label>
+          <Form.Control
+            type="address"
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+            required
+          />
+        </Form.Group>
+
+        {/* <Form.Group className="mb-3" controlId="image">
+          <Form.Label>Image File</Form.Label>
+          <Form.Control
+            value={image}
+            onChange={(e) => setImage(e.target.value)}
+            required
+          />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="imageFile">
+          <Form.Label>Upload Image</Form.Label>
+          <Form.Control type="file" onChange={uploadFileHandler} />
+          {loadingUpload && <LoadingBox></LoadingBox>}
+        </Form.Group> */}
+
         <Form.Group className="mb-3" controlId="password">
           <Form.Label>Password</Form.Label>
           <Form.Control
