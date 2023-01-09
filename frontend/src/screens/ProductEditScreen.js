@@ -178,6 +178,9 @@ export default function ProductEditScreen() {
               onChange={(e) => setName(e.target.value)}
               required
             />
+            <Form.Control.Feedback type="invalid" className="invalidmessage">
+              Please provide a valid Name.
+            </Form.Control.Feedback>
           </Form.Group>
           <Form.Group className="mb-3" controlId="slug">
             <Form.Label>Slug</Form.Label>

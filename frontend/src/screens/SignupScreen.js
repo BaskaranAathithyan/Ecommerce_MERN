@@ -28,6 +28,7 @@ export default function SignupScreen() {
 
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { userInfo } = state;
+
   const submitHandler = async (e) => {
     e.preventDefault();
     const form = e.currentTarget;
@@ -74,6 +75,9 @@ export default function SignupScreen() {
         <Form.Group className="mb-3" controlId="name">
           <Form.Label>Name</Form.Label>
           <Form.Control onChange={(e) => setName(e.target.value)} required />
+          <Form.Control.Feedback type="invalid" className="invalidmessage">
+            Please provide a valid Name.
+          </Form.Control.Feedback>
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="email">
@@ -83,6 +87,9 @@ export default function SignupScreen() {
             required
             onChange={(e) => setEmail(e.target.value)}
           />
+          <Form.Control.Feedback type="invalid" className="invalidmessage">
+            Please provide a valid Email.
+          </Form.Control.Feedback>
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="mobileno">
@@ -92,6 +99,9 @@ export default function SignupScreen() {
             required
             onChange={(e) => setMobileNo(e.target.value)}
           />
+          <Form.Control.Feedback type="invalid" className="invalidmessage">
+            Please provide a valid Mobile No.
+          </Form.Control.Feedback>
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="city">
@@ -101,6 +111,9 @@ export default function SignupScreen() {
             required
             onChange={(e) => setCity(e.target.value)}
           />
+          <Form.Control.Feedback type="invalid" className="invalidmessage">
+            Please provide a valid city.
+          </Form.Control.Feedback>
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="address">
@@ -110,6 +123,9 @@ export default function SignupScreen() {
             required
             onChange={(e) => setAddress(e.target.value)}
           />
+          <Form.Control.Feedback type="invalid" className="invalidmessage">
+            Please provide a valid Address.
+          </Form.Control.Feedback>
         </Form.Group>
 
         {/* <Form.Group className="mb-3" controlId="image">
@@ -133,6 +149,9 @@ export default function SignupScreen() {
             required
             onChange={(e) => setPassword(e.target.value)}
           />
+          <Form.Control.Feedback type="invalid" className="invalidmessage">
+            Please provide a valid password.
+          </Form.Control.Feedback>
           <Form.Group className="mb-3" controlId="confirmPassword">
             <Form.Label>Confirm Password</Form.Label>
             <Form.Control

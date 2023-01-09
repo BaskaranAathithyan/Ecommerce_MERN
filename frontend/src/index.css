@@ -315,3 +315,10 @@ button.thumbnail {
 .procard:hover {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
+
+.invalidmessage {
+  width: 230px;
+  padding-left: 15px;
+  border-radius: 10px;
+  margin-left: 10px;
+}
