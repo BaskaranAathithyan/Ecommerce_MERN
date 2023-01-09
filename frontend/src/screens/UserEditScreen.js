@@ -36,6 +36,8 @@ export default function UserEditScreen() {
     error: "",
   });
 
+  const [validated, setValidated] = useState(false);
+
   const { state } = useContext(Store);
   const { userInfo } = state;
 
@@ -111,7 +113,7 @@ export default function UserEditScreen() {
       ) : error ? (
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
-        <Form onSubmit={submitHandler}>
+        <Form noValidate validated={validated} onSubmit={submitHandler}>
           <Form.Group className="mb-3" controlId="name">
             <Form.Label>Name</Form.Label>
             <Form.Control

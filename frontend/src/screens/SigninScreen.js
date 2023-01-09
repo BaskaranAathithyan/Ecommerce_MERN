@@ -11,6 +11,7 @@ import { getError } from "../utils";
 
 export default function SigninScreen() {
   const navigate = useNavigate();
+  const [validated, setValidated] = useState(false);
   const { search } = useLocation();
   const redirectInUrl = new URLSearchParams(search).get("redirect");
   const redirect = redirectInUrl ? redirectInUrl : `/`;
@@ -48,7 +49,7 @@ export default function SigninScreen() {
         <title>Sign In</title>
       </Helmet>
       <h1 className="my-3">Sign In</h1>
-      <Form onSubmit={submitHandler}>
+      <Form noValidate validated={validated} onSubmit={submitHandler}>
         <Form.Group className="mb-3" controlId="email">
           <Form.Label>Email</Form.Label>
           <Form.Control

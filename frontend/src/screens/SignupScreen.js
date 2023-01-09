@@ -11,6 +11,8 @@ import { getError } from "../utils";
 
 export default function SignupScreen() {
   const navigate = useNavigate();
+  const [validated, setValidated] = useState(false);
+
   const { search } = useLocation();
   const redirectInUrl = new URLSearchParams(search).get("redirect");
   const redirect = redirectInUrl ? redirectInUrl : "/";
@@ -28,6 +30,13 @@ export default function SignupScreen() {
   const { userInfo } = state;
   const submitHandler = async (e) => {
     e.preventDefault();
+    const form = e.currentTarget;
+    if (form.checkValidity() === false) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+
+    setValidated(true);
     if (password !== confirmPassword) {
       toast.error("Passwords do not match");
       return;
@@ -39,7 +48,6 @@ export default function SignupScreen() {
         mobileNo,
         city,
         address,
-
         password,
       });
       ctxDispatch({ type: "USER_SIGNIN", payload: data });
@@ -62,7 +70,7 @@ export default function SignupScreen() {
         <title>Sign Up</title>
       </Helmet>
       <h1 className="my-3">Sign Up</h1>
-      <Form onSubmit={submitHandler}>
+      <Form noValidate validated={validated} onSubmit={submitHandler}>
         <Form.Group className="mb-3" controlId="name">
           <Form.Label>Name</Form.Label>
           <Form.Control onChange={(e) => setName(e.target.value)} required />

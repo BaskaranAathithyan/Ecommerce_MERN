@@ -42,6 +42,7 @@ const reducer = (state, action) => {
 };
 export default function ProductEditScreen() {
   const navigate = useNavigate();
+  const [validated, setValidated] = useState(false);
   const params = useParams(); // /product/:id
   const { id: productId } = params;
 
@@ -169,7 +170,7 @@ export default function ProductEditScreen() {
       ) : error ? (
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
-        <Form onSubmit={submitHandler}>
+        <Form noValidate validated={validated} onSubmit={submitHandler}>
           <Form.Group className="mb-3" controlId="name">
             <Form.Label>Name</Form.Label>
             <Form.Control
