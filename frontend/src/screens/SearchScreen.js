@@ -36,16 +36,32 @@ const reducer = (state, action) => {
 
 const prices = [
   {
-    name: "$1 to $50",
-    value: "1-50",
+    name: "Rs 1 to Rs 1000",
+    value: "1-1000",
   },
   {
-    name: "$51 to $200",
-    value: "51-200",
+    name: "Rs 1001 to Rs 5000",
+    value: "1001-5000",
   },
   {
-    name: "$201 to $1000",
-    value: "201-1000",
+    name: "Rs 5001 to Rs 10000",
+    value: "5001-10001",
+  },
+  {
+    name: "Rs 10001 to Rs 25000",
+    value: "10001-25000",
+  },
+  {
+    name: "Rs 25001 to Rs 50000",
+    value: "25001-50000",
+  },
+  {
+    name: "Rs 50001 to Rs 100000",
+    value: "50001-100000",
+  },
+  {
+    name: "Rs 100001 to Rs 500000",
+    value: "100001-500001",
   },
 ];
 
@@ -132,79 +148,8 @@ export default function SearchScreen() {
       <Helmet>
         <title>Search Products</title>
       </Helmet>
-      <Row>
-        <Col md={3}>
-          <h3>Department</h3>
-          <div>
-            <ul>
-              <li>
-                <Link
-                  className={"all" === category ? "text-bold" : ""}
-                  to={getFilterUrl({ category: "all" })}
-                >
-                  Any
-                </Link>
-              </li>
-              {categories.map((c) => (
-                <li key={c}>
-                  <Link
-                    className={c === category ? "text-bold" : ""}
-                    to={getFilterUrl({ category: c })}
-                  >
-                    {c}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h3>Price</h3>
-            <ul>
-              <li>
-                <Link
-                  className={"all" === price ? "text-bold" : ""}
-                  to={getFilterUrl({ price: "all" })}
-                >
-                  Any
-                </Link>
-              </li>
-              {prices.map((p) => (
-                <li key={p.value}>
-                  <Link
-                    to={getFilterUrl({ price: p.value })}
-                    className={p.value === price ? "text-bold" : ""}
-                  >
-                    {p.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h3>Avg. Customer Review</h3>
-            <ul>
-              {ratings.map((r) => (
-                <li key={r.name}>
-                  <Link
-                    to={getFilterUrl({ rating: r.rating })}
-                    className={`${r.rating}` === `${rating}` ? "text-bold" : ""}
-                  >
-                    <Rating caption={" & up"} rating={r.rating}></Rating>
-                  </Link>
-                </li>
-              ))}
-              <li>
-                <Link
-                  to={getFilterUrl({ rating: "all" })}
-                  className={rating === "all" ? "text-bold" : ""}
-                >
-                  <Rating caption={" & up"} rating={0}></Rating>
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </Col>
-        <Col md={9}>
+      <Row className="mt-5">
+        <Col md={10}>
           {loading ? (
             <LoadingBox></LoadingBox>
           ) : error ? (
@@ -212,7 +157,7 @@ export default function SearchScreen() {
           ) : (
             <>
               <Row className="justify-content-between mb-3">
-                <Col md={6}>
+                <Col md={3}>
                   <div>
                     {countProducts === 0 ? "No" : countProducts} Results
                     {query !== "all" && " : " + query}
@@ -224,6 +169,7 @@ export default function SearchScreen() {
                     rating !== "all" ||
                     price !== "all" ? (
                       <Button
+                        className="closebtn"
                         variant="light"
                         onClick={() => navigate("/search")}
                       >
@@ -232,7 +178,7 @@ export default function SearchScreen() {
                     ) : null}
                   </div>
                 </Col>
-                <Col className="text-end">
+                <Col md={9} className="text-end mt-2">
                   Sort by{" "}
                   <select
                     value={order}
@@ -240,8 +186,12 @@ export default function SearchScreen() {
                       navigate(getFilterUrl({ order: e.target.value }));
                     }}
                   >
-                    <option value="newest">Newest Arrivals</option>
-                    <option value="lowest">Price: Low to High</option>
+                    <option className="mt-2" value="newest">
+                      Newest Arrivals
+                    </option>
+                    <option className="mt-2" value="lowest">
+                      Price: Low to High
+                    </option>
                     <option value="highest">Price: High to Low</option>
                     <option value="toprated">Avg. Customer Reviews</option>
                   </select>
@@ -264,7 +214,10 @@ export default function SearchScreen() {
                   <LinkContainer
                     key={x + 1}
                     className="mx-1"
-                    to={getFilterUrl({ page: x + 1 })}
+                    to={{
+                      pathname: "/search",
+                      search: getFilterUrl({ page: x + 1 }).substring(7),
+                    }}
                   >
                     <Button
                       className={Number(page) === x + 1 ? "text-bold" : ""}
@@ -277,6 +230,79 @@ export default function SearchScreen() {
               </div>
             </>
           )}
+        </Col>
+        <Col md={2}>
+          <h4>Categories</h4>
+          <div className="searchCard">
+            <ul>
+              <li>
+                <Link
+                  className={"all" === category ? "text-bold" : "searchCard"}
+                  to={getFilterUrl({ category: "all" })}
+                >
+                  Any
+                </Link>
+              </li>
+              {categories.map((c) => (
+                <li key={c}>
+                  <Link
+                    className={c === category ? "text-bold" : "searchCard"}
+                    to={getFilterUrl({ category: c })}
+                  >
+                    {c}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="searchCard">
+            <h4>Price</h4>
+            <ul>
+              <li className="searchCard">
+                <Link
+                  className={"all" === price ? "text-bold" : "searchCard"}
+                  to={getFilterUrl({ price: "all" })}
+                >
+                  Any
+                </Link>
+              </li>
+              {prices.map((p) => (
+                <li key={p.value}>
+                  <Link
+                    to={getFilterUrl({ price: p.value })}
+                    className={p.value === price ? "text-bold " : "searchCard"}
+                  >
+                    {p.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <h4>Avg. Customer Review</h4>
+            <ul>
+              {ratings.map((r) => (
+                <li key={r.name}>
+                  <Link
+                    to={getFilterUrl({ rating: r.rating })}
+                    className={
+                      `${r.rating}` === `${rating}` ? "text-bold" : "searchCard"
+                    }
+                  >
+                    <Rating caption={" & up"} rating={r.rating}></Rating>
+                  </Link>
+                </li>
+              ))}
+              <li>
+                <Link
+                  to={getFilterUrl({ rating: "all" })}
+                  className={rating === "all" ? "text-bold" : "searchCard"}
+                >
+                  <Rating caption={" & up"} rating={0}></Rating>
+                </Link>
+              </li>
+            </ul>
+          </div>
         </Col>
       </Row>
     </div>

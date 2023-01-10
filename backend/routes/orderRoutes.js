@@ -71,6 +71,17 @@ orderRouter.get(
       { $sort: { _id: 1 } },
     ]);
 
+    /* const dailyUsers = await User.aggregate([
+      {
+        $group: {
+          _id: { $dateToString: { format: "%Y-%m-%d", date: "$createdAt" } },
+          users: { $sum: 1 },
+          sales: { $sum: "$totalPrice" },
+        },
+      },
+      { $sort: { _id: 1 } },
+    ]); */
+
     const productCategories = await Product.aggregate([
       {
         $group: {

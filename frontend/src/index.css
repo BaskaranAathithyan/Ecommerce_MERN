@@ -30,7 +30,7 @@ main {
 }
 
 .rating span {
-  color: #ffc000;
+  color: #2491c4;
 }
 
 .product {
@@ -77,7 +77,7 @@ main {
 }
 
 .site-container {
-  transition: 0.4s;
+  transition: 0.5s;
 }
 .active-cont {
   margin-left: 200px;
@@ -321,4 +321,26 @@ button.thumbnail {
   padding-left: 15px;
   border-radius: 10px;
   margin-left: 10px;
+}
+
+/* Search Box & Screen*/
+.navsearch {
+  background-color: #212529;
+  color: white;
+  height: 1000px;
+}
+
+.navsearch2 {
+  margin-top: 15px;
+  color: white;
+  margin-left: 5px;
+}
+
+.navsearch2:hover {
+  color: #0cbedd;
+}
+
+.searchCard {
+  color: #000000;
+  text-decoration: none;
 }

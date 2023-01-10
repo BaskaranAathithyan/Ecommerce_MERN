@@ -148,6 +148,20 @@ export default function DashboardScreen() {
               </div>
             </Col>
           </Row>
+          {/*  <div className="my-3">
+            <h2>Users</h2>
+
+            <Chart
+              width="90%"
+              height="400px"
+              chartType="Bar"
+              loader={<div>Loading Chart...</div>}
+              data={[
+                ["Date", "users"],
+                ...summary.dailyUsers.map((x) => [x._id, x.uses]),
+              ]}
+            ></Chart>
+          </div> */}
         </>
       )}
     </div>
