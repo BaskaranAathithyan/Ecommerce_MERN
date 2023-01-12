@@ -54,7 +54,7 @@ export default function PaymentMethodScreen() {
             <Form.Check
               type="radio"
               id="COD"
-              label="COD"
+              label="Cash On Delivery"
               value="Cash On Delivery"
               checked={paymentMethodName === "COD"}
               onChange={(e) => setPaymentMethod(e.target.value)}
