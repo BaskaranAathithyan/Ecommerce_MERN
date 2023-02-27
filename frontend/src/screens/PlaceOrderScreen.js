@@ -87,68 +87,49 @@ export default function PlaceOrderScreen() {
       <Helmet>
         <title>Preview Order</title>
       </Helmet>
-      <h1 className="my-3">Your Order</h1>
+      <h3 className="my-3">My Order summary</h3>
+
       <Row>
         <Col md={8}>
-          <Card className="mb-3 bg-dark text-light">
-            <Card.Body>
-              <Card.Title>Shipping</Card.Title>
-              <Card.Text>
-                <strong>Name:</strong> {cart.shippingAddress.fullName} <br />
-                <strong>Address: </strong> {cart.shippingAddress.address},
-                {cart.shippingAddress.city}, {cart.shippingAddress.postalCode},
-                {cart.shippingAddress.country}
-              </Card.Text>
-              <Link className="btn btn-light" to="/shipping">
-                Edit
-              </Link>
-            </Card.Body>
-          </Card>
-
-          <Card className="mb-3 bg-dark text-light">
-            <Card.Body>
-              <Card.Title>Payment</Card.Title>
-              <Card.Text>
-                <strong>Method:</strong> {cart.paymentMethod}
-              </Card.Text>
-              <Link className="btn btn-light" to="/payment">
-                Edit
-              </Link>
-            </Card.Body>
-          </Card>
-
-          <Card className="mb-3 bg-dark text-light">
-            <Card.Body>
-              <Card.Title>Items</Card.Title>
-              <ListGroup variant="flush">
-                {cart.cartItems.map((item) => (
-                  <ListGroup.Item key={item._id}>
-                    <Row className="align-items-center">
-                      <Col md={7}>
-                        <img
-                          src={item.image}
-                          alt={item.name}
-                          className="img-fluid rounded img-thumbnail"
-                        ></img>{" "}
-                        <Link to={`/product/${item.slug}`}>{item.name}</Link>
-                      </Col>
-                      <Col md={2}>
-                        <span>{item.quantity}</span>
-                      </Col>
-                      <Col md={3}>Rs {item.price}</Col>
-                    </Row>
-                  </ListGroup.Item>
-                ))}
-              </ListGroup>
-              <Link className="btn btn-light" to="/cart">
-                Edit
-              </Link>
-            </Card.Body>
-          </Card>
+          <Row>
+            <Col md={6}>
+              <Card className="mb-3 mt-5 bg-light text-dark">
+                <Card.Body>
+                  <Card.Title>Shipping / Event Details</Card.Title>
+                  <Card.Text>
+                    <strong>Name:</strong> {cart.shippingAddress.fullName}{" "}
+                    <br />
+                    <strong>Address: </strong> {cart.shippingAddress.address},
+                    {cart.shippingAddress.city},{" "}
+                    {cart.shippingAddress.postalCode},
+                    {cart.shippingAddress.country}
+                    <br />
+                    <strong>Event Details : </strong>{" "}
+                    {cart.shippingAddress.date}, {cart.shippingAddress.time}
+                  </Card.Text>
+                  <Link className="btn btn-info" to="/shipping">
+                    Edit
+                  </Link>
+                </Card.Body>
+              </Card>
+            </Col>
+            <Col md={6}>
+              <Card className="mb-3 mt-5 bg-light text-dark">
+                <Card.Body>
+                  <Card.Title>Payment Method</Card.Title>
+                  <Card.Text className="mt-5">
+                    <strong>Method:</strong> {cart.paymentMethod}
+                  </Card.Text>
+                  <Link className="btn btn-info mt-2" to="/payment">
+                    Edit
+                  </Link>
+                </Card.Body>
+              </Card>
+            </Col>
+          </Row>
         </Col>
-
-        <Col md={3}>
-          <Card className="bg-dark text-light">
+        <Col md={4}>
+          <Card className="bg-light mt-5 text-dark">
             <Card.Body>
               <Card.Title>Order Summary</Card.Title>
               <ListGroup variant="flush">
@@ -197,6 +178,42 @@ export default function PlaceOrderScreen() {
           </Card>
         </Col>
       </Row>
+
+      <Col md={8}>
+        <Card className="mb-3 bg-light text-dark">
+          <Card.Body>
+            <Card.Title>Items</Card.Title>
+            <ListGroup variant="flush">
+              {cart.cartItems.map((item) => (
+                <ListGroup.Item key={item._id}>
+                  <Row className="align-items-center">
+                    <Col md={7}>
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        className="img-fluid rounded img-thumbnail"
+                      ></img>{" "}
+                      <Link
+                        className="linkstyle ml-5"
+                        to={`/product/${item.slug}`}
+                      >
+                        <strong>{item.name}</strong>
+                      </Link>
+                    </Col>
+                    <Col md={2}>
+                      <span>{item.quantity}</span>
+                    </Col>
+                    <Col md={3}>Rs {item.price}</Col>
+                  </Row>
+                </ListGroup.Item>
+              ))}
+            </ListGroup>
+            <Link className="btn btn-info" to="/cart">
+              Edit
+            </Link>
+          </Card.Body>
+        </Card>
+      </Col>
     </div>
   );
 }
