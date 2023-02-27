@@ -86,10 +86,10 @@ export default function SignupScreen() {
       ctxDispatch({ type: "USER_SIGNIN", payload: data });
       localStorage.setItem("userInfo", JSON.stringify(data));
       navigate(redirect || "/");
-      toast.error("User created Successfully !");
+      toast.success("User created Successfully !");
     } catch (err) {
-      //toast.error(getError(err));
-      toast.error("Please enter valid details !");
+      toast.error(getError(err));
+      //toast.error("Please enter valid details !");
     }
   };
 

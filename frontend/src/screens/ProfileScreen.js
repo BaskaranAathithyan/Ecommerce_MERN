@@ -6,6 +6,9 @@ import { Store } from "../Store";
 import { toast } from "react-toastify";
 import { getError } from "../utils";
 import axios from "axios";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Card from "react-bootstrap/Card";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -96,60 +99,88 @@ export default function ProfileScreen() {
   }; */
 
   return (
-    <div className="container small-container">
+    <div className="container">
       <Helmet>
         <title>User Profile</title>
       </Helmet>
-      <h1 className="my-3">User Profile</h1>
-      <form onSubmit={submitHandler}>
-        <Form.Group className="mb-3" controlId="name">
-          <Form.Label>Name</Form.Label>
-          <Form.Control
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="name">
-          <Form.Label>Email</Form.Label>
-          <Form.Control
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="name">
-          <Form.Label>Mobile No</Form.Label>
-          <Form.Control
-            type="mobileno"
-            value={mobileNo}
-            onChange={(e) => setMobileNo(e.target.value)}
-            required
-          />
-        </Form.Group>
+      <Row>
+        <Col md={7}>
+          <h2 className="my-3">My Profile</h2>
+        </Col>
+        <Col md={5}>
+          <h2 className="my-3">Edit Profile</h2>
+        </Col>
+      </Row>
 
-        <Form.Group className="mb-3" controlId="name">
-          <Form.Label>City</Form.Label>
-          <Form.Control
-            type="city"
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
-            required
-          />
-        </Form.Group>
+      <Row>
+        <Col md={7}>
+          <Card>
+            <Card.Title>
+              <h5>My name : {name}</h5>
+            </Card.Title>
+            <Card.Body>
+              <h5>Email Address : {email}</h5>
+              <h5>Mobile No : {mobileNo}</h5>
+              <h5>Address : {address}</h5>
+              <h5>City : {city}</h5>
+            </Card.Body>
+          </Card>
+        </Col>
+        <Col md={5}>
+          <form onSubmit={submitHandler}>
+            <Form.Group className="mb-3" controlId="name">
+              <Form.Label>Name</Form.Label>
+              <Form.Control
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="name">
+              <Form.Label>Email</Form.Label>
+              <Form.Control
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="name">
+              <Form.Label>Mobile No</Form.Label>
+              <Form.Control
+                type="mobileno"
+                value={mobileNo}
+                onChange={(e) => setMobileNo(e.target.value)}
+                required
+              />
+            </Form.Group>
 
-        <Form.Group className="mb-3" controlId="name">
-          <Form.Label>Address</Form.Label>
-          <Form.Control
-            type="address"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-            required
-          />
-        </Form.Group>
+            <Row>
+              <Col md={6}>
+                <Form.Group className="mb-3" controlId="name">
+                  <Form.Label>City</Form.Label>
+                  <Form.Control
+                    type="city"
+                    value={city}
+                    onChange={(e) => setCity(e.target.value)}
+                    required
+                  />
+                </Form.Group>
+              </Col>
+              <Col md={6}>
+                <Form.Group className="mb-3" controlId="name">
+                  <Form.Label>Address</Form.Label>
+                  <Form.Control
+                    type="address"
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
+                    required
+                  />
+                </Form.Group>
+              </Col>
+            </Row>
 
-        {/* <Form.Group className="mb-3" controlId="image">
+            {/* <Form.Group className="mb-3" controlId="image">
           <Form.Label>Image File</Form.Label>
           <Form.Control
             value={image}
@@ -164,24 +195,33 @@ export default function ProfileScreen() {
           {loadingUpload && <LoadingBox></LoadingBox>}
         </Form.Group> */}
 
-        <Form.Group className="mb-3" controlId="password">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type="password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="password">
-          <Form.Label>Confirm Password</Form.Label>
-          <Form.Control
-            type="password"
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          />
-        </Form.Group>
-        <div className="mb-3">
-          <Button type="submit">Update</Button>
-        </div>
-      </form>
+            <Row>
+              <Col md={6}>
+                <Form.Group className="mb-3" controlId="password">
+                  <Form.Label>Password</Form.Label>
+                  <Form.Control
+                    type="password"
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </Form.Group>
+              </Col>
+              <Col md={6}>
+                <Form.Group className="mb-3" controlId="password">
+                  <Form.Label>Confirm Password</Form.Label>
+                  <Form.Control
+                    type="password"
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                  />
+                </Form.Group>
+              </Col>
+            </Row>
+
+            <div className="mb-3">
+              <Button type="submit">Update</Button>
+            </div>
+          </form>
+        </Col>
+      </Row>
     </div>
   );
 }
