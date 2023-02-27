@@ -51,7 +51,7 @@ main {
   height: 80px;
 }
 .small-container {
-  max-width: 600px;
+  max-width: 800px;
 }
 
 .checkout-steps > div {
@@ -371,4 +371,16 @@ button.thumbnail {
   text-decoration: none;
   color: #000000;
   margin-left: 15px;
+}
+
+.btnsignin {
+  text-decoration: none;
+  background-color: #0cbedd;
+  color: #000000;
+  border-radius: 5px;
+  padding: 5px;
+  margin-left: 10px;
+}
+
+.imagelink {
 }

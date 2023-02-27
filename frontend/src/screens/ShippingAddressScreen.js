@@ -17,6 +17,8 @@ export default function ShippingAddressScreen() {
   const [fullName, setFullName] = useState(shippingAddress.fullName || "");
   const [address, setAddress] = useState(shippingAddress.address || "");
   const [city, setCity] = useState(shippingAddress.city || "");
+  const [time, setTime] = useState(shippingAddress.time || "");
+  const [date, setDate] = useState(shippingAddress.date || "");
   const [postalCode, setPostalCode] = useState(
     shippingAddress.postalCode || ""
   );
@@ -37,6 +39,8 @@ export default function ShippingAddressScreen() {
         city,
         postalCode,
         country,
+        date,
+        time,
       },
     });
     localStorage.setItem(
@@ -47,6 +51,8 @@ export default function ShippingAddressScreen() {
         city,
         postalCode,
         country,
+        date,
+        time,
       })
     );
     navigate("/payment");
@@ -59,7 +65,7 @@ export default function ShippingAddressScreen() {
       </Helmet>
       <CheckoutSteps step1 step2></CheckoutSteps>
       <div className="container small-container">
-        <h1 className="my-3">Shipping Address</h1>
+        <h2 className="my-3">Shipping Address / Event Address</h2>
         <Form onSubmit={submitHandler}>
           <Form.Group className="mb-3" controlId="fullName">
             <Form.Label>Full Name</Form.Label>
@@ -93,6 +99,24 @@ export default function ShippingAddressScreen() {
             <Form.Control
               value={postalCode}
               onChange={(e) => setPostalCode(e.target.value)}
+              required
+            />
+          </Form.Group>
+
+          <Form.Group className="mb-3" controlId="date">
+            <Form.Label>Date</Form.Label>
+            <Form.Control
+              value={date}
+              onChange={(e) => setDate(e.target.value)}
+              required
+            />
+          </Form.Group>
+
+          <Form.Group className="mb-3" controlId="time">
+            <Form.Label>Expected Time</Form.Label>
+            <Form.Control
+              value={time}
+              onChange={(e) => setTime(e.target.value)}
               required
             />
           </Form.Group>

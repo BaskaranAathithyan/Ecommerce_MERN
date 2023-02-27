@@ -8,6 +8,8 @@ import { useContext, useEffect, useState } from "react";
 import { Store } from "../Store";
 import { toast } from "react-toastify";
 import { getError } from "../utils";
+import ReactPlayer from "react-player";
+import Video from "../pics/video.mp4";
 
 export default function SigninScreen() {
   const navigate = useNavigate();
@@ -48,6 +50,7 @@ export default function SigninScreen() {
       <Helmet>
         <title>Sign In</title>
       </Helmet>
+
       <h1 className="my-3">Sign In</h1>
       <Form noValidate validated={validated} onSubmit={submitHandler}>
         <Form.Group className="mb-3" controlId="email">

@@ -235,6 +235,11 @@ export default function OrderScreen() {
                     {order.shippingAddress.postalCode},
                     {order.shippingAddress.country}
                   </Card.Text>
+                  <Card.Text>
+                    <strong>Event Date:</strong> {order.shippingAddress.date}{" "}
+                    <br />
+                    <strong>Event Time:</strong> {order.shippingAddress.time}{" "}
+                  </Card.Text>
                   {order.isDelivered ? (
                     <MessageBox variant="success">
                       Delivered at {order.deliveredAt}

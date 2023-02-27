@@ -105,7 +105,6 @@ userRouter.post(
       mobileNo: req.body.mobileNo,
       city: req.body.city,
       address: req.body.address,
-      //image: req.body.image,
       password: bcrypt.hashSync(req.body.password),
     });
     const user = await newUser.save();

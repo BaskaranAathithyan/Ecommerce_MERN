@@ -49,6 +49,7 @@ function HomeScreen() {
   }, []);
 
   const customHandler = () => {
+    //navigate("/signin?redirect=/customorders");
     navigate(`/customorders`);
   };
 

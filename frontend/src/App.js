@@ -220,6 +220,14 @@ function App() {
                 </ProtectedRoute>
               }
             ></Route>
+            {/* <Route
+              path="/customorders"
+              element={
+                <ProtectedRoute>
+                  <CustomOrderScreen />
+                </ProtectedRoute>
+              }
+            ></Route> */}
             <Route
               path="/payment"
               element={

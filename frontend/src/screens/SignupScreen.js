@@ -8,6 +8,8 @@ import { useContext, useEffect, useState } from "react";
 import { Store } from "../Store";
 import { toast } from "react-toastify";
 import { getError } from "../utils";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 export default function SignupScreen() {
   const navigate = useNavigate();
@@ -29,6 +31,21 @@ export default function SignupScreen() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { userInfo } = state;
 
+  function validateName(name) {
+    const regex = /^[a-zA-Z\s]+$/;
+    return regex.test(name);
+  }
+
+  function validateEmail(email) {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+  }
+
+  function validateMobileNumber(number) {
+    const regex = /^[0-9]{10}$/;
+    return regex.test(number);
+  }
+
   const submitHandler = async (e) => {
     e.preventDefault();
     const form = e.currentTarget;
@@ -38,7 +55,22 @@ export default function SignupScreen() {
     }
 
     setValidated(true);
-    if (password !== confirmPassword) {
+    if (!validateName(name)) {
+      toast.error("Name should only contain alphabets and spaces!");
+      return;
+    } else if (!validateEmail(email)) {
+      toast.error("Email address is not valid!");
+      return;
+    } else if (!validateMobileNumber(mobileNo)) {
+      toast.error("Phone number is not valid!");
+      return;
+    } else if (address === "") {
+      toast.error("Address can't be empty!");
+      return;
+    } else if (!validateName(city)) {
+      toast.error("City should only contain alphabets and spaces!");
+      return;
+    } else if (password !== confirmPassword) {
       toast.error("Passwords do not match");
       return;
     }
@@ -54,8 +86,10 @@ export default function SignupScreen() {
       ctxDispatch({ type: "USER_SIGNIN", payload: data });
       localStorage.setItem("userInfo", JSON.stringify(data));
       navigate(redirect || "/");
+      toast.error("User created Successfully !");
     } catch (err) {
-      toast.error(getError(err));
+      //toast.error(getError(err));
+      toast.error("Please enter valid details !");
     }
   };
 
@@ -104,29 +138,34 @@ export default function SignupScreen() {
           </Form.Control.Feedback>
         </Form.Group>
 
-        <Form.Group className="mb-3" controlId="city">
-          <Form.Label>City</Form.Label>
-          <Form.Control
-            type="city"
-            required
-            onChange={(e) => setCity(e.target.value)}
-          />
-          <Form.Control.Feedback type="invalid" className="invalidmessage">
-            Please provide a valid city.
-          </Form.Control.Feedback>
-        </Form.Group>
-
-        <Form.Group className="mb-3" controlId="address">
-          <Form.Label>Address</Form.Label>
-          <Form.Control
-            type="address"
-            required
-            onChange={(e) => setAddress(e.target.value)}
-          />
-          <Form.Control.Feedback type="invalid" className="invalidmessage">
-            Please provide a valid Address.
-          </Form.Control.Feedback>
-        </Form.Group>
+        <Row>
+          <Col md={6}>
+            <Form.Group className="mb-3" controlId="city">
+              <Form.Label>City</Form.Label>
+              <Form.Control
+                type="city"
+                required
+                onChange={(e) => setCity(e.target.value)}
+              />
+              <Form.Control.Feedback type="invalid" className="invalidmessage">
+                Please provide a valid city.
+              </Form.Control.Feedback>
+            </Form.Group>
+          </Col>
+          <Col md={6}>
+            <Form.Group className="mb-3" controlId="address">
+              <Form.Label>Address</Form.Label>
+              <Form.Control
+                type="address"
+                required
+                onChange={(e) => setAddress(e.target.value)}
+              />
+              <Form.Control.Feedback type="invalid" className="invalidmessage">
+                Please provide a valid Address.
+              </Form.Control.Feedback>
+            </Form.Group>
+          </Col>
+        </Row>
 
         {/* <Form.Group className="mb-3" controlId="image">
           <Form.Label>Image File</Form.Label>
@@ -142,25 +181,32 @@ export default function SignupScreen() {
           <Form.Control type="file" />
         </Form.Group> */}
 
-        <Form.Group className="mb-3" controlId="password">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type="password"
-            required
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <Form.Control.Feedback type="invalid" className="invalidmessage">
-            Please provide a valid password.
-          </Form.Control.Feedback>
-          <Form.Group className="mb-3" controlId="confirmPassword">
-            <Form.Label>Confirm Password</Form.Label>
-            <Form.Control
-              type="password"
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              required
-            />
-          </Form.Group>
-        </Form.Group>
+        <Row>
+          <Col md={6}>
+            <Form.Group className="mb-3" controlId="password">
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                type="password"
+                required
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <Form.Control.Feedback type="invalid" className="invalidmessage">
+                Please provide a valid password.
+              </Form.Control.Feedback>
+            </Form.Group>
+          </Col>
+          <Col md={6}>
+            <Form.Group className="mb-3" controlId="confirmPassword">
+              <Form.Label>Confirm Password</Form.Label>
+              <Form.Control
+                type="password"
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                required
+              />
+            </Form.Group>
+          </Col>
+        </Row>
+
         <div className="mb-3">
           <Button type="submit" varient="dark">
             Sign Up
@@ -168,7 +214,9 @@ export default function SignupScreen() {
         </div>
         <div className="mb-3">
           Already have an account?{" "}
-          <Link to={`/signin?redirect=${redirect}`}>Sign-In</Link>
+          <Link className="btnsignin" to={`/signin?redirect=${redirect}`}>
+            Sign-In
+          </Link>
         </div>
       </Form>
     </Container>
