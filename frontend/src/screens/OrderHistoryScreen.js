@@ -66,10 +66,12 @@ export default function OrderHistoryScreen() {
           <thead>
             <tr>
               <th>ID</th>
-              <th>DATE</th>
+              <th>DATE ( Order placed )</th>
               <th>TOTAL</th>
               <th>PAID</th>
               <th>DELIVERED</th>
+              <th>EVENT DATE</th>
+              <th>EVENT TIME</th>
               <th>ACTIONS</th>
             </tr>
           </thead>
@@ -85,6 +87,8 @@ export default function OrderHistoryScreen() {
                     ? order.deliveredAt.substring(0, 10)
                     : "No"}
                 </td>
+                <td>{order.shippingAddress.date}</td>
+                <td>{order.shippingAddress.time}</td>
                 <td>
                   <Button
                     type="button"
