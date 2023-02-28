@@ -4,7 +4,8 @@
     padding: 0;
   }
   .btnPrint,
-  .deliverBtn {
+  .deliverBtn,
+  .paypalBtn {
     display: none;
   }
 

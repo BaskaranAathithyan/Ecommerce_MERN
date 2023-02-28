@@ -235,7 +235,7 @@ export default function OrderScreen() {
             varient="light"
             onClick={handlePrint}
           >
-            Generate Receipt
+            Generate Invoice
           </Button>
         </Col>
       </Row>
@@ -387,7 +387,7 @@ export default function OrderScreen() {
                     {isPending ? (
                       <LoadingBox />
                     ) : (
-                      <div>
+                      <div className="paypalBtn">
                         <PayPalScriptProvider>
                           <PayPalButtons
                             createOrder={createOrder}
