@@ -10,6 +10,8 @@ import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
 import { Store } from "../Store";
 import { getError } from "../utils";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -141,25 +143,30 @@ export default function UserEditScreen() {
             />
           </Form.Group>
 
-          <Form.Group className="mb-3" controlId="mobileno">
-            <Form.Label>City</Form.Label>
-            <Form.Control
-              value={city}
-              type="mobileNo"
-              onChange={(e) => setCity(e.target.value)}
-              required
-            />
-          </Form.Group>
-
-          <Form.Group className="mb-3" controlId="mobileno">
-            <Form.Label>Address</Form.Label>
-            <Form.Control
-              value={address}
-              type="mobileNo"
-              onChange={(e) => setAddress(e.target.value)}
-              required
-            />
-          </Form.Group>
+          <Row>
+            <Col md={6}>
+              <Form.Group className="mb-3" controlId="mobileno">
+                <Form.Label>City</Form.Label>
+                <Form.Control
+                  value={city}
+                  type="mobileNo"
+                  onChange={(e) => setCity(e.target.value)}
+                  required
+                />
+              </Form.Group>
+            </Col>
+            <Col md={6}>
+              <Form.Group className="mb-3" controlId="mobileno">
+                <Form.Label>Address</Form.Label>
+                <Form.Control
+                  value={address}
+                  type="mobileNo"
+                  onChange={(e) => setAddress(e.target.value)}
+                  required
+                />
+              </Form.Group>
+            </Col>
+          </Row>
 
           <Form.Check
             className="mb-3"
