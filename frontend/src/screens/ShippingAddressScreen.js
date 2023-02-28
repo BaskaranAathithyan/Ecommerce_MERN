@@ -11,7 +11,7 @@ import Col from "react-bootstrap/Col";
 
 export default function ShippingAddressScreen() {
   const navigate = useNavigate();
-  const [validated, setValidated] = useState(false);
+
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const {
     userInfo,
@@ -33,41 +33,32 @@ export default function ShippingAddressScreen() {
   }, [userInfo, navigate]);
   const [country, setCountry] = useState(shippingAddress.country || "");
 
-  function validateDate(date) {
-    const regex = /^(\d{4})-(\d{2})-(\d{2})$/;
-    return regex.test(date);
-  }
-
   const submitHandler = (e) => {
-    setValidated(true);
-
-    try {
-      e.preventDefault();
-      ctxDispatch({
-        type: "SAVE_SHIPPING_ADDRESS",
-        payload: {
-          fullName,
-          address,
-          city,
-          postalCode,
-          country,
-          date,
-          time,
-        },
-      });
-      localStorage.setItem(
-        "shippingAddress",
-        JSON.stringify({
-          fullName,
-          address,
-          city,
-          postalCode,
-          country,
-          date,
-          time,
-        })
-      );
-    } catch {}
+    e.preventDefault();
+    ctxDispatch({
+      type: "SAVE_SHIPPING_ADDRESS",
+      payload: {
+        fullName,
+        address,
+        city,
+        postalCode,
+        country,
+        date,
+        time,
+      },
+    });
+    localStorage.setItem(
+      "shippingAddress",
+      JSON.stringify({
+        fullName,
+        address,
+        city,
+        postalCode,
+        country,
+        date,
+        time,
+      })
+    );
     navigate("/payment");
   };
 
@@ -79,7 +70,7 @@ export default function ShippingAddressScreen() {
       <CheckoutSteps step1 step2></CheckoutSteps>
       <div className="container small-container">
         <h2 className="my-3">Shipping Address / Event Address</h2>
-        <Form noValidate validated={validated} onSubmit={submitHandler}>
+        <Form onSubmit={submitHandler}>
           <Form.Group className="mb-3" controlId="fullName">
             <Form.Label>Full Name</Form.Label>
             <Form.Control
@@ -128,6 +119,9 @@ export default function ShippingAddressScreen() {
                 <Form.Label>Event Date</Form.Label>
                 <Form.Control
                   value={date}
+                  pattern="^\d{4}-\d{2}-\d{2}$"
+                  required
+                  title="Please enter a date in the format YYYY-MM-DD"
                   onChange={(e) => setDate(e.target.value)}
                   required
                 />
@@ -138,6 +132,9 @@ export default function ShippingAddressScreen() {
                 <Form.Label>Expected Time</Form.Label>
                 <Form.Control
                   value={time}
+                  pattern="^(0?[1-9]|1[0-2]):[0-5][0-9] (am|pm)$"
+                  required
+                  title="Please enter a time in the format hh:mm am/pm"
                   onChange={(e) => setTime(e.target.value)}
                   required
                 />
