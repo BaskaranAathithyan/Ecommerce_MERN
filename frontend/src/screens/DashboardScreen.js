@@ -117,10 +117,10 @@ export default function DashboardScreen() {
             <Col md={8} className="chartdesign">
               <div className="my-3">
                 <Row>
-                  <Col md={10}>
+                  <Col md={8}>
                     <h2>Sales</h2>
                   </Col>
-                  <Col md={2}>
+                  <Col md={4}>
                     <Button
                       className="btnPrint"
                       type="button"

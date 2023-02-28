@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 import { getError } from "../utils";
 import ReactPlayer from "react-player";
 import Video from "../pics/video.mp4";
+import back from "../pics/back.png";
 
 export default function SigninScreen() {
   const navigate = useNavigate();
@@ -46,48 +47,57 @@ export default function SigninScreen() {
   }, [navigate, redirect, userInfo]);
 
   return (
-    <Container className="small-container">
-      <Helmet>
-        <title>Sign In</title>
-      </Helmet>
+    <div
+      style={{
+        background: `url(${back})`,
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        height: "80vh",
+      }}
+    >
+      <Container className="small-container">
+        <Helmet>
+          <title>Sign In</title>
+        </Helmet>
 
-      <h1 className="my-3">Sign In</h1>
-      <Form noValidate validated={validated} onSubmit={submitHandler}>
-        <Form.Group className="mb-3" controlId="email">
-          <Form.Label>Email</Form.Label>
-          <Form.Control
-            type="email"
-            required
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <Form.Control.Feedback type="invalid" className="invalidmessage">
-            Please provide a valid Email.
-          </Form.Control.Feedback>
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="password">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type="password"
-            required
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <Form.Control.Feedback type="invalid" className="invalidmessage">
-            Please provide a valid Password.
-          </Form.Control.Feedback>
-        </Form.Group>
-        <div className="mb-3">
-          <Button type="submit" varient="dark">
-            Sign In
-          </Button>
-          <Link to={`/cart?redirect=${redirect}`}></Link>
-        </div>
-        <div className="mb-3">
-          New customer?{" "}
-          <Link className="signinbtn" to={`/signup?redirect=${redirect}`}>
-            Create your account
-          </Link>
-        </div>
-      </Form>
-    </Container>
+        <h1 className="my-3">Sign In</h1>
+        <Form noValidate validated={validated} onSubmit={submitHandler}>
+          <Form.Group className="mb-3" controlId="email">
+            <Form.Label>Email</Form.Label>
+            <Form.Control
+              type="email"
+              required
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <Form.Control.Feedback type="invalid" className="invalidmessage">
+              Please provide a valid Email.
+            </Form.Control.Feedback>
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="password">
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              type="password"
+              required
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <Form.Control.Feedback type="invalid" className="invalidmessage">
+              Please provide a valid Password.
+            </Form.Control.Feedback>
+          </Form.Group>
+          <div className="mb-3">
+            <Button type="submit" varient="dark">
+              Sign In
+            </Button>
+            <Link to={`/cart?redirect=${redirect}`}></Link>
+          </div>
+          <div className="mb-3">
+            New customer?{" "}
+            <Link className="signinbtn" to={`/signup?redirect=${redirect}`}>
+              Create your account
+            </Link>
+          </div>
+        </Form>
+      </Container>
+    </div>
   );
 }
