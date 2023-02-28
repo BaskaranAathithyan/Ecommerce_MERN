@@ -19,6 +19,7 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import jsPDF from "jspdf";
 
 function reducer(state, action) {
   switch (action.type) {
@@ -210,6 +211,10 @@ export default function OrderScreen() {
     }
   }
 
+  const handlePrint = () => {
+    window.print();
+  };
+
   return loading ? (
     <LoadingBox></LoadingBox>
   ) : error ? (
@@ -219,7 +224,22 @@ export default function OrderScreen() {
       <Helmet>
         <title>Order {orderId}</title>
       </Helmet>
-      <h5 className="my-3">Order ID - {orderId}</h5>
+      <Row>
+        <Col md={10}>
+          <h5 className="my-3">Order ID - {orderId}</h5>
+        </Col>
+        <Col md={2}>
+          <Button
+            className="btnPrint"
+            type="button"
+            varient="light"
+            onClick={handlePrint}
+          >
+            Generate Receipt
+          </Button>
+        </Col>
+      </Row>
+
       <Row>
         <Col md={8}>
           <Row>
