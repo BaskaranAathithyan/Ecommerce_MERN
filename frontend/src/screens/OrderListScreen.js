@@ -8,6 +8,9 @@ import MessageBox from "../components/MessageBox";
 import { Store } from "../Store";
 import { getError } from "../utils";
 import { toast } from "react-toastify";
+import "../style/print.css";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -87,12 +90,31 @@ export default function OrderListScreen() {
     }
   };
 
+  const handlePrint = () => {
+    window.print();
+  };
+
   return (
     <div className="marginAll">
       <Helmet>
         <title>Orders</title>
       </Helmet>
-      <h1>Orders</h1>
+      <Row>
+        <Col md={10}>
+          <h1>Orders</h1>{" "}
+        </Col>
+        <Col md={2}>
+          <Button
+            className="btnPrint"
+            type="button"
+            varient="light"
+            onClick={handlePrint}
+          >
+            Generate PDF
+          </Button>
+        </Col>
+      </Row>
+
       {loadingDelete && <LoadingBox></LoadingBox>}
       {loading ? (
         <LoadingBox></LoadingBox>
