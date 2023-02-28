@@ -3,6 +3,7 @@ import axios from "axios";
 import { Store } from "../Store";
 import { getError } from "../utils";
 import LoadingBox from "../components/LoadingBox";
+import Button from "react-bootstrap/Button";
 import MessageBox from "../components/MessageBox";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -51,9 +52,13 @@ export default function DashboardScreen() {
     fetchData();
   }, [userInfo]);
 
+  const handlePrint = () => {
+    window.print();
+  };
+
   return (
     <div className="marginAll">
-      <h2>Welcome {userInfo.name} !</h2>
+      <h2 className="dashboardCard">Welcome {userInfo.name} !</h2>
 
       {loading ? (
         <LoadingBox />
@@ -61,7 +66,7 @@ export default function DashboardScreen() {
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
         <>
-          <Row>
+          <Row className="dashboardCard">
             <Col md={3}>
               <Card className="cardDesign">
                 <Card.Body>
@@ -111,7 +116,22 @@ export default function DashboardScreen() {
           <Row>
             <Col md={8} className="chartdesign">
               <div className="my-3">
-                <h2>Sales</h2>
+                <Row>
+                  <Col md={10}>
+                    <h2>Sales</h2>
+                  </Col>
+                  <Col md={2}>
+                    <Button
+                      className="btnPrint"
+                      type="button"
+                      varient="light"
+                      onClick={handlePrint}
+                    >
+                      Sales report
+                    </Button>
+                  </Col>
+                </Row>
+
                 {summary.dailyOrders.length === 0 ? (
                   <MessageBox>No Sale</MessageBox>
                 ) : (
@@ -129,7 +149,7 @@ export default function DashboardScreen() {
               </div>
             </Col>
             <Col md={4} className="chartdesign">
-              <div className="my-3">
+              <div className="my-3 dashboardCard">
                 <h2>Categories</h2>
                 {summary.productCategories.length === 0 ? (
                   <MessageBox>No Category</MessageBox>

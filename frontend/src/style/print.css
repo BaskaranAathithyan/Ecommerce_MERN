@@ -5,7 +5,8 @@
   }
   .btnPrint,
   .deliverBtn,
-  .paypalBtn {
+  .paypalBtn,
+  .dashboardCard {
     display: none;
   }
 
