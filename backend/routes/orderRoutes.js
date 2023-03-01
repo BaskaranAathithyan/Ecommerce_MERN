@@ -51,6 +51,37 @@ orderRouter.get(
         },
       },
     ]);
+
+    const UndeliverdOrders = await Order.aggregate([
+      {
+        $match: {
+          isDelivered: false, // filter documents where isDelivered is false
+        },
+      },
+      {
+        $group: {
+          _id: null,
+          numDOrders: { $sum: 1 },
+          totalSales: { $sum: "$totalPrice" },
+        },
+      },
+    ]);
+
+    const UnPaidOrders = await Order.aggregate([
+      {
+        $match: {
+          isPaid: false, // filter documents where isPaid is false
+        },
+      },
+      {
+        $group: {
+          _id: null,
+          numPOrders: { $sum: 1 },
+          totalSales: { $sum: "$totalPrice" },
+        },
+      },
+    ]);
+
     const Paypalorders = await Order.aggregate([
       {
         $match: { paymentMethod: "PayPal" },
@@ -75,6 +106,7 @@ orderRouter.get(
         },
       },
     ]);
+
     const users = await User.aggregate([
       {
         $group: {
@@ -95,12 +127,32 @@ orderRouter.get(
       { $sort: { _id: 1 } },
     ]);
 
+    const dailyOrdersCount = await Order.aggregate([
+      {
+        $group: {
+          _id: { $dateToString: { format: "%Y-%m-%d", date: "$createdAt" } },
+          orders: { $sum: 1 },
+        },
+      },
+      { $sort: { _id: 1 } },
+    ]);
+
     const monthlyOrders = await Order.aggregate([
       {
         $group: {
           _id: { $dateToString: { format: "%Y-%m", date: "$createdAt" } },
           orders: { $sum: 1 },
           sales: { $sum: "$totalPrice" },
+        },
+      },
+      { $sort: { _id: 1 } },
+    ]);
+
+    const monthlyOrderCount = await Order.aggregate([
+      {
+        $group: {
+          _id: { $dateToString: { format: "%Y-%m", date: "$createdAt" } },
+          orders: { $sum: 1 },
         },
       },
       { $sort: { _id: 1 } },
@@ -117,19 +169,16 @@ orderRouter.get(
       { $sort: { _id: 1 } },
     ]);
 
-    const SalesCategories = await Order.aggregate([
+    const yearlyOrderCount = await Order.aggregate([
       {
         $group: {
-          _id: {
-            category: "$category",
-            date: { $dateToString: { format: "%Y-%m-%d", date: "$createdAt" } },
-          },
-          sales: { $sum: "$totalPrice" },
+          _id: { $dateToString: { format: "%Y", date: "$createdAt" } },
           orders: { $sum: 1 },
         },
       },
-      { $sort: { "_id.date": 1 } },
+      { $sort: { _id: 1 } },
     ]);
+
     const productCategories = await Product.aggregate([
       {
         $group: {
@@ -146,9 +195,13 @@ orderRouter.get(
       CODorders,
       dailyOrders,
       monthlyOrders,
-      SalesCategories,
+      UnPaidOrders,
+      UndeliverdOrders,
+      dailyOrdersCount,
       yearlyOrders,
       productCategories,
+      monthlyOrderCount,
+      yearlyOrderCount,
     });
   })
 );

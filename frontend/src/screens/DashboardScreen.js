@@ -9,6 +9,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
 import Chart from "react-google-charts";
+import { useNavigate } from "react-router-dom";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -28,6 +29,7 @@ const reducer = (state, action) => {
 };
 
 export default function DashboardScreen() {
+  const navigate = useNavigate();
   const [{ loading, summary, error }, dispatch] = useReducer(reducer, {
     loading: true,
     error: "",
@@ -56,10 +58,32 @@ export default function DashboardScreen() {
     window.print();
   };
 
+  const handleUser = () => {
+    navigate(`/admin/users`);
+  };
+  const handleOrder = () => {
+    navigate(`/admin/orders`);
+  };
+  const handleProducts = () => {
+    navigate(`/admin/products`);
+  };
+
   const [showDiv, setShowDiv] = useState(false);
+  const [showDivOrder, setShowDivOrder] = useState(false);
+  const [showDivOrderMonth, setShowDivOrderMonth] = useState(false);
+  const [showDivOrderYear, setShowDivOrderYear] = useState(false);
 
   const handleYearSale = () => {
     setShowDiv(!showDiv);
+  };
+  const handleOrderCount = () => {
+    setShowDivOrder(!showDivOrder);
+  };
+  const handleOrderCountMonth = () => {
+    setShowDivOrderMonth(!showDivOrderMonth);
+  };
+  const handleOrderCountYear = () => {
+    setShowDivOrderYear(!showDivOrderYear);
   };
 
   return (
@@ -74,7 +98,7 @@ export default function DashboardScreen() {
         <>
           <Row className="dashboardCard">
             <Col md={3}>
-              <Card className="cardDesign">
+              <Card className="cardDesign" onClick={handleUser}>
                 <Card.Body>
                   <div className="row align-items-center">
                     <div className="col-auto">
@@ -95,7 +119,7 @@ export default function DashboardScreen() {
               </Card>
             </Col>
             <Col md={3}>
-              <Card className="cardDesign">
+              <Card className="cardDesign" onClick={handleOrder}>
                 <Card.Body>
                   <div className="row align-items-center">
                     <div className="col-auto">
@@ -117,7 +141,7 @@ export default function DashboardScreen() {
               </Card>
             </Col>
             <Col md={3}>
-              <Card className="cardDesign">
+              <Card className="cardDesign" onClick={handleProducts}>
                 <Card.Body>
                   <div className="row align-items-center">
                     <div className="col-auto">
@@ -137,7 +161,7 @@ export default function DashboardScreen() {
               </Card>
             </Col>
             <Col md={3}>
-              <Card className="cardDesign">
+              <Card className="cardDesign" onClick={handleOrder}>
                 <Card.Body>
                   <div className="row align-items-center">
                     <div className="col-auto">
@@ -197,18 +221,15 @@ export default function DashboardScreen() {
               </div>
             </Col>
             <Col md={3} className="chartdesign">
-              <Card className="cardDesign">
+              <Card className="cardDesign" onClick={handleOrder}>
                 <Card.Body>
                   <div className="row align-items-center">
-                    <div className="col-auto">
-                      <i class="fas fa-wallet fa-2x"></i>
-                    </div>
                     <div className="col">
-                      <Card.Text style={{ fontSize: "1.25rem" }}>
+                      <Card.Text style={{ fontSize: "1rem" }}>
                         {" "}
                         Sales ( Cash on Delivery )
                       </Card.Text>
-                      <Card.Title style={{ fontSize: "1rem" }}>
+                      <Card.Title style={{ fontSize: "1.5rem" }}>
                         Rs .
                         {summary.CODorders && summary.users[0]
                           ? summary.CODorders[0].totalSales.toFixed(2)
@@ -218,21 +239,52 @@ export default function DashboardScreen() {
                   </div>
                 </Card.Body>
               </Card>
-              <Card className="cardDesign">
+              <Card className="cardDesign" onClick={handleOrder}>
                 <Card.Body>
                   <div className="row align-items-center">
-                    <div className="col-auto">
-                      <i class="fas fa-credit-card fa-2x"></i>
-                    </div>
                     <div className="col">
-                      <Card.Text style={{ fontSize: "1.25rem" }}>
+                      <Card.Text style={{ fontSize: "1rem" }}>
                         {" "}
                         Sales ( Paypal )
                       </Card.Text>
-                      <Card.Title style={{ fontSize: "1rem" }}>
+                      <Card.Title style={{ fontSize: "1.5rem" }}>
                         Rs .
                         {summary.Paypalorders && summary.users[0]
                           ? summary.Paypalorders[0].totalSales.toFixed(2)
+                          : 0}
+                      </Card.Title>
+                    </div>
+                  </div>
+                </Card.Body>
+              </Card>
+              <Card className="cardDesign" onClick={handleOrder}>
+                <Card.Body>
+                  <div className="row align-items-center">
+                    <div className="col">
+                      <Card.Text style={{ fontSize: "1rem" }}>
+                        {" "}
+                        Undeliverd Orders
+                      </Card.Text>
+                      <Card.Title style={{ fontSize: "1.5rem" }}>
+                        {summary.orders && summary.users[0]
+                          ? summary.UndeliverdOrders[0].numDOrders
+                          : 0}
+                      </Card.Title>
+                    </div>
+                  </div>
+                </Card.Body>
+              </Card>
+              <Card className="cardDesign" onClick={handleOrder}>
+                <Card.Body>
+                  <div className="row align-items-center">
+                    <div className="col">
+                      <Card.Text style={{ fontSize: "1rem" }}>
+                        {" "}
+                        Unsettled Orders
+                      </Card.Text>
+                      <Card.Title style={{ fontSize: "1.5rem" }}>
+                        {summary.orders && summary.users[0]
+                          ? summary.UnPaidOrders[0].numPOrders
                           : 0}
                       </Card.Title>
                     </div>
@@ -268,6 +320,15 @@ export default function DashboardScreen() {
                 <Button className="btnSale" onClick={handleYearSale}>
                   Yearly Sales
                 </Button>
+                <Button className="btnSale" onClick={handleOrderCount}>
+                  Daily Orders
+                </Button>
+                <Button className="btnSale" onClick={handleOrderCountMonth}>
+                  Monthly Orders
+                </Button>
+                <Button className="btnSale" onClick={handleOrderCountYear}>
+                  Yearly Orders
+                </Button>
               </div>
             </Col>
             <Col md={5} className="chartdesign">
@@ -290,57 +351,134 @@ export default function DashboardScreen() {
               </div>
             </Col>
             <Col md={3}></Col>
-
-            {showDiv && (
-              <div>
-                <Col md={6} className="chartdesign">
-                  <div className="my-3">
-                    <Row>
-                      <Col md={8}>
-                        <h3>Yearly Sales</h3>
-                      </Col>
-                      <Col md={4}></Col>
-                    </Row>
-
-                    {summary.yearlyOrders.length === 0 ? (
-                      <MessageBox>No Sale</MessageBox>
-                    ) : (
-                      <Chart
-                        width="90%"
-                        height="300px"
-                        chartType="Line"
-                        loader={<div>Loading Chart...</div>}
-                        data={[
-                          ["Date", "Sales"],
-                          ...summary.yearlyOrders.map((x) => [x._id, x.sales]),
-                        ]}
-                      ></Chart>
-                    )}
-                  </div>
-                </Col>
-              </div>
-            )}
           </Row>
 
-          <Col md={5} className="chartdesign">
-            <div className="my-3 dashboardCard">
-              <h2>Categories</h2>
-              {summary.SalesCategories.length === 0 ? (
-                <MessageBox>No Category</MessageBox>
-              ) : (
-                <Chart
-                  width="90%"
-                  height="300px"
-                  chartType="Line"
-                  loader={<div>Loading Chart...</div>}
-                  data={[
-                    ["category", "Sales"],
-                    ...summary.SalesCategories.map((x) => [x._id, x.sales]),
-                  ]}
-                ></Chart>
+          <Row>
+            <Col md={10}>
+              {showDiv && (
+                <div>
+                  <Col md={12} className="chartdesign">
+                    <div className="my-3">
+                      <Row>
+                        <Col md={8}>
+                          <h3>Yearly Sales</h3>
+                        </Col>
+                        <Col md={4}></Col>
+                      </Row>
+
+                      {summary.yearlyOrders.length === 0 ? (
+                        <MessageBox>No Sale</MessageBox>
+                      ) : (
+                        <Chart
+                          width="90%"
+                          height="300px"
+                          chartType="Line"
+                          loader={<div>Loading Chart...</div>}
+                          data={[
+                            ["Date", "Sales"],
+                            ...summary.yearlyOrders.map((x) => [
+                              x._id,
+                              x.sales,
+                            ]),
+                          ]}
+                        ></Chart>
+                      )}
+                    </div>
+                  </Col>
+                </div>
               )}
-            </div>
-          </Col>
+            </Col>
+            <Col md={10}>
+              {showDivOrder && (
+                <div className="my-3">
+                  <Row>
+                    <Col md={8}>
+                      <h3>Daily Orders</h3>
+                    </Col>
+                    <Col md={4}></Col>
+                  </Row>
+
+                  {summary.dailyOrders.length === 0 ? (
+                    <MessageBox>No Orders</MessageBox>
+                  ) : (
+                    <Chart
+                      width="90%"
+                      height="400px"
+                      chartType="Bar"
+                      loader={<div>Loading Chart...</div>}
+                      data={[
+                        ["Date", "Orders"],
+                        ...summary.dailyOrdersCount.map((x) => [
+                          x._id,
+                          x.orders,
+                        ]),
+                      ]}
+                    ></Chart>
+                  )}
+                </div>
+              )}
+            </Col>
+            <Col md={6}>
+              {showDivOrderMonth && (
+                <div className="my-3">
+                  <Row>
+                    <Col md={8}>
+                      <h3>Monthly Orders</h3>
+                    </Col>
+                    <Col md={4}></Col>
+                  </Row>
+
+                  {summary.monthlyOrderCount.length === 0 ? (
+                    <MessageBox>No Orders</MessageBox>
+                  ) : (
+                    <Chart
+                      width="90%"
+                      height="400px"
+                      chartType="LineChart"
+                      loader={<div>Loading Chart...</div>}
+                      data={[
+                        ["Date", "Orders"],
+                        ...summary.monthlyOrderCount.map((x) => [
+                          x._id,
+                          x.orders,
+                        ]),
+                      ]}
+                    ></Chart>
+                  )}
+                </div>
+              )}
+            </Col>
+            <Col md={6}>
+              {showDivOrderYear && (
+                <div className="my-3">
+                  <Row>
+                    <Col md={8}>
+                      <h3>Yearly Orders</h3>
+                    </Col>
+                    <Col md={4}></Col>
+                  </Row>
+
+                  {summary.yearlyOrderCount.length === 0 ? (
+                    <MessageBox>No Orders</MessageBox>
+                  ) : (
+                    <Chart
+                      width="90%"
+                      height="400px"
+                      chartType="BarChart"
+                      loader={<div>Loading Chart...</div>}
+                      data={[
+                        ["Date", "Orders"],
+                        ...summary.yearlyOrderCount.map((x) => [
+                          x._id,
+                          x.orders,
+                        ]),
+                      ]}
+                    ></Chart>
+                  )}
+                </div>
+              )}
+            </Col>
+          </Row>
         </>
       )}
     </div>
