@@ -10,6 +10,7 @@ import Button from "react-bootstrap/Button";
 import { toast } from "react-toastify";
 import { getError } from "../utils";
 import Badge from "react-bootstrap/Badge";
+import Table from "react-bootstrap/Table";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -136,6 +137,10 @@ export default function ProductListScreen() {
     }
   };
 
+  const handlePrint = () => {
+    window.print();
+  };
+
   return (
     <div className="marginAll">
       <Row>
@@ -146,6 +151,9 @@ export default function ProductListScreen() {
           <div>
             <Button type="button" onClick={createHandler}>
               Create Product
+            </Button>{" "}
+            <Button type="button" onClick={handlePrint}>
+              Generate PDF
             </Button>
           </div>
         </Col>
@@ -160,7 +168,7 @@ export default function ProductListScreen() {
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
         <>
-          <table className="table">
+          <Table hover className="table ">
             <thead>
               <tr>
                 <th>Name</th>
@@ -183,14 +191,14 @@ export default function ProductListScreen() {
                   <td>{product.countInStock}</td>
                   <td>{product.rating}</td>
                   <td>
-                    <Badge bg="success">
+                    <Badge pill bg="success">
                       {product.updatedAt.substring(0, 10)}
                     </Badge>
                   </td>
                   <td>
                     <Button
                       type="button"
-                      variant="light"
+                      variant="outline-success"
                       onClick={() => navigate(`/admin/product/${product._id}`)}
                     >
                       Edit
@@ -198,7 +206,7 @@ export default function ProductListScreen() {
                     &nbsp;
                     <Button
                       type="button"
-                      variant="light"
+                      variant="outline-danger"
                       onClick={() => deleteHandler(product)}
                     >
                       Delete
@@ -207,7 +215,7 @@ export default function ProductListScreen() {
                 </tr>
               ))}
             </tbody>
-          </table>
+          </Table>
           <div>
             {[...Array(pages).keys()].map((x) => (
               <Link

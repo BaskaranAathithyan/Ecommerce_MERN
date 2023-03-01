@@ -11,6 +11,8 @@ import { toast } from "react-toastify";
 import "../style/print.css";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import Table from "react-bootstrap/Table";
+import Badge from "react-bootstrap/Badge";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -121,36 +123,49 @@ export default function OrderListScreen() {
       ) : error ? (
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
-        <table className="table">
+        <Table hover className="table">
           <thead>
             <tr>
-              <th>ID</th>
-              <th>USER</th>
-              <th>DATE</th>
-              <th>TOTAL</th>
-              <th>PAID</th>
-              <th>DELIVERED</th>
-              <th>ACTIONS</th>
+              <th>Customer</th>
+              <th>Order placed at</th>
+              <th>Total</th>
+              <th>Payment Method</th>
+              <th>Paid at</th>
+              <th>Deliverd at</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
             {orders.map((order) => (
               <tr key={order._id}>
-                <td>{order._id}</td>
                 <td>{order.user ? order.user.name : "DELETED USER"}</td>
                 <td>{order.createdAt.substring(0, 10)}</td>
                 <td>{order.totalPrice.toFixed(2)}</td>
-                <td>{order.isPaid ? order.paidAt.substring(0, 10) : "No"}</td>
-
-                <td>
-                  {order.isDelivered
-                    ? order.deliveredAt.substring(0, 10)
-                    : "No"}
+                <td>{order.paymentMethod}</td>
+                <td className={order.isPaid ? "" : "not-paid"}>
+                  {order.isPaid ? (
+                    order.paidAt.substring(0, 10)
+                  ) : (
+                    <Badge pill bg="danger">
+                      Not paid
+                    </Badge>
+                  )}
                 </td>
+
+                <td className={order.isDelivered ? "" : "not-deliverd"}>
+                  {order.isDelivered ? (
+                    order.deliveredAt.substring(0, 10)
+                  ) : (
+                    <Badge pill bg="info">
+                      Not deliverd
+                    </Badge>
+                  )}
+                </td>
+
                 <td>
                   <Button
                     type="button"
-                    variant="light"
+                    variant="outline-success"
                     onClick={() => {
                       navigate(`/order/${order._id}`);
                     }}
@@ -160,7 +175,7 @@ export default function OrderListScreen() {
                   &nbsp;
                   <Button
                     type="button"
-                    variant="light"
+                    variant="outline-danger"
                     onClick={() => deleteHandler(order)}
                   >
                     Delete
@@ -169,7 +184,7 @@ export default function OrderListScreen() {
               </tr>
             ))}
           </tbody>
-        </table>
+        </Table>
       )}
     </div>
   );
