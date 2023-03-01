@@ -175,7 +175,7 @@ export default function ProductListScreen() {
                 <th>Price</th>
                 <th>Category</th>
                 <th>Brand</th>
-                <th>Count</th>
+                <th>Count in Stock</th>
                 <th>Rating</th>
                 <th>Last updated at</th>
                 <th>Actions</th>

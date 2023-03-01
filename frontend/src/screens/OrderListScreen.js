@@ -127,11 +127,11 @@ export default function OrderListScreen() {
           <thead>
             <tr>
               <th>Customer</th>
-              <th>Order placed at</th>
+              <th>Order placed on</th>
               <th>Total</th>
               <th>Payment Method</th>
-              <th>Paid at</th>
-              <th>Deliverd at</th>
+              <th>Paid on</th>
+              <th>Deliverd on</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -141,7 +141,16 @@ export default function OrderListScreen() {
                 <td>{order.user ? order.user.name : "DELETED USER"}</td>
                 <td>{order.createdAt.substring(0, 10)}</td>
                 <td>{order.totalPrice.toFixed(2)}</td>
-                <td>{order.paymentMethod}</td>
+
+                <td>
+                  {order.paymentMethod === "PayPal" ? (
+                    <Badge bg="primary">{order.paymentMethod}</Badge>
+                  ) : order.paymentMethod === "Cash On Delivery" ? (
+                    <Badge bg="secondary">{order.paymentMethod}</Badge>
+                  ) : (
+                    order.paymentMethod
+                  )}
+                </td>
                 <td className={order.isPaid ? "" : "not-paid"}>
                   {order.isPaid ? (
                     order.paidAt.substring(0, 10)

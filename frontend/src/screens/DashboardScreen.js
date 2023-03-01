@@ -76,51 +76,93 @@ export default function DashboardScreen() {
             <Col md={3}>
               <Card className="cardDesign">
                 <Card.Body>
-                  <Card.Text> Users</Card.Text>
-                  <Card.Title>
-                    {summary.users && summary.users[0]
-                      ? summary.users[0].numUsers
-                      : 0}
-                  </Card.Title>
+                  <div className="row align-items-center">
+                    <div className="col-auto">
+                      <i className="fas fa-user fa-3x"></i>
+                    </div>
+                    <div className="col">
+                      <Card.Text style={{ fontSize: "1.25rem" }}>
+                        Customers
+                      </Card.Text>
+                      <Card.Title style={{ fontSize: "2rem" }}>
+                        {summary.users && summary.users[0]
+                          ? summary.users[0].numUsers
+                          : 0}
+                      </Card.Title>
+                    </div>
+                  </div>
                 </Card.Body>
               </Card>
             </Col>
             <Col md={3}>
               <Card className="cardDesign">
                 <Card.Body>
-                  <Card.Text> Orders</Card.Text>
-                  <Card.Title>
-                    {summary.orders && summary.users[0]
-                      ? summary.orders[0].numOrders
-                      : 0}
-                  </Card.Title>
+                  <div className="row align-items-center">
+                    <div className="col-auto">
+                      <i class="fas fa-money-check fa-3x"></i>
+                    </div>
+                    <div className="col">
+                      <Card.Text style={{ fontSize: "1.25rem" }}>
+                        {" "}
+                        Orders
+                      </Card.Text>
+                      <Card.Title style={{ fontSize: "2rem" }}>
+                        {summary.orders && summary.users[0]
+                          ? summary.orders[0].numOrders
+                          : 0}
+                      </Card.Title>
+                    </div>
+                  </div>
                 </Card.Body>
               </Card>
             </Col>
             <Col md={3}>
               <Card className="cardDesign">
                 <Card.Body>
-                  <Card.Text> Categories</Card.Text>
-                  <Card.Title>{summary.productCategories.length}</Card.Title>
+                  <div className="row align-items-center">
+                    <div className="col-auto">
+                      <i class="fas fa-list fa-3x"></i>
+                    </div>
+                    <div className="col">
+                      <Card.Text style={{ fontSize: "1.25rem" }}>
+                        {" "}
+                        Categories
+                      </Card.Text>
+                      <Card.Title style={{ fontSize: "2rem" }}>
+                        {summary.productCategories.length}
+                      </Card.Title>
+                    </div>
+                  </div>
                 </Card.Body>
               </Card>
             </Col>
             <Col md={3}>
               <Card className="cardDesign">
                 <Card.Body>
-                  <Card.Text> Orders Amount</Card.Text>
-                  <Card.Title>
-                    Rs .
-                    {summary.orders && summary.users[0]
-                      ? summary.orders[0].totalSales.toFixed(2)
-                      : 0}
-                  </Card.Title>
+                  <div className="row align-items-center">
+                    <div className="col-auto">
+                      <i class="fas fa-wallet fa-3x"></i>
+                    </div>
+                    <div className="col">
+                      <Card.Text style={{ fontSize: "1.25rem" }}>
+                        {" "}
+                        Total Sales
+                      </Card.Text>
+                      <Card.Title style={{ fontSize: "2rem" }}>
+                        Rs .
+                        {summary.orders && summary.users[0]
+                          ? summary.orders[0].totalSales.toFixed(2)
+                          : 0}
+                      </Card.Title>
+                    </div>
+                  </div>
                 </Card.Body>
               </Card>
-            </Col>
+            </Col>{" "}
           </Row>
+
           <Row>
-            <Col md={8} className="chartdesign">
+            <Col md={9} className="chartdesign">
               <div className="my-3">
                 <Row>
                   <Col md={8}>
@@ -154,28 +196,53 @@ export default function DashboardScreen() {
                 )}
               </div>
             </Col>
-            <Col md={4} className="chartdesign">
-              <div className="my-3 dashboardCard">
-                <h2>Categories</h2>
-                {summary.productCategories.length === 0 ? (
-                  <MessageBox>No Category</MessageBox>
-                ) : (
-                  <Chart
-                    width="90%"
-                    height="400px"
-                    chartType="PieChart"
-                    loader={<div>Loading Chart...</div>}
-                    data={[
-                      ["Category", "Products"],
-                      ...summary.productCategories.map((x) => [x._id, x.count]),
-                    ]}
-                  ></Chart>
-                )}
-              </div>
+            <Col md={3} className="chartdesign">
+              <Card className="cardDesign">
+                <Card.Body>
+                  <div className="row align-items-center">
+                    <div className="col-auto">
+                      <i class="fas fa-wallet fa-2x"></i>
+                    </div>
+                    <div className="col">
+                      <Card.Text style={{ fontSize: "1.25rem" }}>
+                        {" "}
+                        Sales ( Cash on Delivery )
+                      </Card.Text>
+                      <Card.Title style={{ fontSize: "1rem" }}>
+                        Rs .
+                        {summary.CODorders && summary.users[0]
+                          ? summary.CODorders[0].totalSales.toFixed(2)
+                          : 0}
+                      </Card.Title>
+                    </div>
+                  </div>
+                </Card.Body>
+              </Card>
+              <Card className="cardDesign">
+                <Card.Body>
+                  <div className="row align-items-center">
+                    <div className="col-auto">
+                      <i class="fas fa-credit-card fa-2x"></i>
+                    </div>
+                    <div className="col">
+                      <Card.Text style={{ fontSize: "1.25rem" }}>
+                        {" "}
+                        Sales ( Paypal )
+                      </Card.Text>
+                      <Card.Title style={{ fontSize: "1rem" }}>
+                        Rs .
+                        {summary.Paypalorders && summary.users[0]
+                          ? summary.Paypalorders[0].totalSales.toFixed(2)
+                          : 0}
+                      </Card.Title>
+                    </div>
+                  </div>
+                </Card.Body>
+              </Card>
             </Col>
           </Row>
           <Row>
-            <Col md={6} className="chartdesign">
+            <Col md={7} className="chartdesign">
               <div className="my-3">
                 <Row>
                   <Col md={8}>
@@ -203,7 +270,26 @@ export default function DashboardScreen() {
                 </Button>
               </div>
             </Col>
-            <Col md={6} className="chartdesign"></Col>
+            <Col md={5} className="chartdesign">
+              <div className="my-3 dashboardCard">
+                <h2>Categories</h2>
+                {summary.productCategories.length === 0 ? (
+                  <MessageBox>No Category</MessageBox>
+                ) : (
+                  <Chart
+                    width="90%"
+                    height="400px"
+                    chartType="PieChart"
+                    loader={<div>Loading Chart...</div>}
+                    data={[
+                      ["Category", "Products"],
+                      ...summary.productCategories.map((x) => [x._id, x.count]),
+                    ]}
+                  ></Chart>
+                )}
+              </div>
+            </Col>
+            <Col md={3}></Col>
 
             {showDiv && (
               <div>
@@ -235,6 +321,26 @@ export default function DashboardScreen() {
               </div>
             )}
           </Row>
+
+          <Col md={5} className="chartdesign">
+            <div className="my-3 dashboardCard">
+              <h2>Categories</h2>
+              {summary.SalesCategories.length === 0 ? (
+                <MessageBox>No Category</MessageBox>
+              ) : (
+                <Chart
+                  width="90%"
+                  height="300px"
+                  chartType="Line"
+                  loader={<div>Loading Chart...</div>}
+                  data={[
+                    ["category", "Sales"],
+                    ...summary.SalesCategories.map((x) => [x._id, x.sales]),
+                  ]}
+                ></Chart>
+              )}
+            </div>
+          </Col>
         </>
       )}
     </div>

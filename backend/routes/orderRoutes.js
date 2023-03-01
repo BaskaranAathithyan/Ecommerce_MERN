@@ -51,6 +51,30 @@ orderRouter.get(
         },
       },
     ]);
+    const Paypalorders = await Order.aggregate([
+      {
+        $match: { paymentMethod: "PayPal" },
+      },
+      {
+        $group: {
+          _id: "$paymentMethod",
+          count: { $sum: 1 },
+          totalSales: { $sum: "$totalPrice" },
+        },
+      },
+    ]);
+    const CODorders = await Order.aggregate([
+      {
+        $match: { paymentMethod: "Cash On Delivery" },
+      },
+      {
+        $group: {
+          _id: "$paymentMethod",
+          count: { $sum: 1 },
+          totalSales: { $sum: "$totalPrice" },
+        },
+      },
+    ]);
     const users = await User.aggregate([
       {
         $group: {
@@ -93,6 +117,19 @@ orderRouter.get(
       { $sort: { _id: 1 } },
     ]);
 
+    const SalesCategories = await Order.aggregate([
+      {
+        $group: {
+          _id: {
+            category: "$category",
+            date: { $dateToString: { format: "%Y-%m-%d", date: "$createdAt" } },
+          },
+          sales: { $sum: "$totalPrice" },
+          orders: { $sum: 1 },
+        },
+      },
+      { $sort: { "_id.date": 1 } },
+    ]);
     const productCategories = await Product.aggregate([
       {
         $group: {
@@ -105,8 +142,11 @@ orderRouter.get(
     res.send({
       users,
       orders,
+      Paypalorders,
+      CODorders,
       dailyOrders,
       monthlyOrders,
+      SalesCategories,
       yearlyOrders,
       productCategories,
     });
