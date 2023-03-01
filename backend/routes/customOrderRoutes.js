@@ -1,5 +1,6 @@
 import express from "express";
 import expressAsyncHandler from "express-async-handler";
+import CustomOrder from "../models/CustomOrderModel.js";
 import { isAuth, isAdmin, generateToken } from "../utils.js";
 
 const customOrderRouter = express.Router();
@@ -15,7 +16,8 @@ customOrderRouter.post(
       category: req.body.category,
       description: req.body.description,
     });
-    const CustomOrder = await newCustomOrder.save();
+    const customOrder = await newCustomOrder.save();
+    res.status(201).send({ message: "New custom Order Created", customOrder });
   })
 );
 

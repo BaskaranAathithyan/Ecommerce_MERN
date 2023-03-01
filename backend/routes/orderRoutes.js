@@ -71,16 +71,27 @@ orderRouter.get(
       { $sort: { _id: 1 } },
     ]);
 
-    /* const dailyUsers = await User.aggregate([
+    const monthlyOrders = await Order.aggregate([
       {
         $group: {
-          _id: { $dateToString: { format: "%Y-%m-%d", date: "$createdAt" } },
-          users: { $sum: 1 },
+          _id: { $dateToString: { format: "%Y-%m", date: "$createdAt" } },
+          orders: { $sum: 1 },
           sales: { $sum: "$totalPrice" },
         },
       },
       { $sort: { _id: 1 } },
-    ]); */
+    ]);
+
+    const yearlyOrders = await Order.aggregate([
+      {
+        $group: {
+          _id: { $dateToString: { format: "%Y", date: "$createdAt" } },
+          orders: { $sum: 1 },
+          sales: { $sum: "$totalPrice" },
+        },
+      },
+      { $sort: { _id: 1 } },
+    ]);
 
     const productCategories = await Product.aggregate([
       {
@@ -90,7 +101,15 @@ orderRouter.get(
         },
       },
     ]);
-    res.send({ users, orders, dailyOrders, productCategories });
+
+    res.send({
+      users,
+      orders,
+      dailyOrders,
+      monthlyOrders,
+      yearlyOrders,
+      productCategories,
+    });
   })
 );
 

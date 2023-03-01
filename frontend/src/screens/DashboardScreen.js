@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect, useContext } from "react";
+import React, { useReducer, useEffect, useContext, useState } from "react";
 import axios from "axios";
 import { Store } from "../Store";
 import { getError } from "../utils";
@@ -56,6 +56,12 @@ export default function DashboardScreen() {
     window.print();
   };
 
+  const [showDiv, setShowDiv] = useState(false);
+
+  const handleYearSale = () => {
+    setShowDiv(!showDiv);
+  };
+
   return (
     <div className="marginAll">
       <h2 className="dashboardCard">Welcome {userInfo.name} !</h2>
@@ -95,7 +101,7 @@ export default function DashboardScreen() {
               <Card className="cardDesign">
                 <Card.Body>
                   <Card.Text> Categories</Card.Text>
-                  <Card.Title>{summary.productCategories[4].count}</Card.Title>
+                  <Card.Title>{summary.productCategories.length}</Card.Title>
                 </Card.Body>
               </Card>
             </Col>
@@ -118,7 +124,7 @@ export default function DashboardScreen() {
               <div className="my-3">
                 <Row>
                   <Col md={8}>
-                    <h2>Sales</h2>
+                    <h3>Daily Sales</h3>
                   </Col>
                   <Col md={4}>
                     <Button
@@ -168,20 +174,67 @@ export default function DashboardScreen() {
               </div>
             </Col>
           </Row>
-          {/*  <div className="my-3">
-            <h2>Users</h2>
+          <Row>
+            <Col md={6} className="chartdesign">
+              <div className="my-3">
+                <Row>
+                  <Col md={8}>
+                    <h3>Monthly Sales</h3>
+                  </Col>
+                  <Col md={4}></Col>
+                </Row>
 
-            <Chart
-              width="90%"
-              height="400px"
-              chartType="Bar"
-              loader={<div>Loading Chart...</div>}
-              data={[
-                ["Date", "users"],
-                ...summary.dailyUsers.map((x) => [x._id, x.uses]),
-              ]}
-            ></Chart>
-          </div> */}
+                {summary.monthlyOrders.length === 0 ? (
+                  <MessageBox>No Sale</MessageBox>
+                ) : (
+                  <Chart
+                    width="90%"
+                    height="300px"
+                    chartType="AreaChart"
+                    loader={<div>Loading Chart...</div>}
+                    data={[
+                      ["Date", "Sales"],
+                      ...summary.monthlyOrders.map((x) => [x._id, x.sales]),
+                    ]}
+                  ></Chart>
+                )}
+                <Button className="btnSale" onClick={handleYearSale}>
+                  Yearly Sales
+                </Button>
+              </div>
+            </Col>
+            <Col md={6} className="chartdesign"></Col>
+
+            {showDiv && (
+              <div>
+                <Col md={6} className="chartdesign">
+                  <div className="my-3">
+                    <Row>
+                      <Col md={8}>
+                        <h3>Yearly Sales</h3>
+                      </Col>
+                      <Col md={4}></Col>
+                    </Row>
+
+                    {summary.yearlyOrders.length === 0 ? (
+                      <MessageBox>No Sale</MessageBox>
+                    ) : (
+                      <Chart
+                        width="90%"
+                        height="300px"
+                        chartType="Line"
+                        loader={<div>Loading Chart...</div>}
+                        data={[
+                          ["Date", "Sales"],
+                          ...summary.yearlyOrders.map((x) => [x._id, x.sales]),
+                        ]}
+                      ></Chart>
+                    )}
+                  </div>
+                </Col>
+              </div>
+            )}
+          </Row>
         </>
       )}
     </div>

@@ -9,6 +9,7 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import { toast } from "react-toastify";
 import { getError } from "../utils";
+import Badge from "react-bootstrap/Badge";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -124,7 +125,7 @@ export default function ProductListScreen() {
         await axios.delete(`/api/products/${product._id}`, {
           headers: { Authorization: `Bearer ${userInfo.token}` },
         });
-        toast.success("product deleted successfully");
+        toast.success("Product deleted successfully");
         dispatch({ type: "DELETE_SUCCESS" });
       } catch (err) {
         toast.error(getError(error));
@@ -139,7 +140,7 @@ export default function ProductListScreen() {
     <div className="marginAll">
       <Row>
         <Col>
-          <h1>Products</h1>
+          <h2>Products</h2>
         </Col>
         <Col className="col text-end">
           <div>
@@ -162,22 +163,30 @@ export default function ProductListScreen() {
           <table className="table">
             <thead>
               <tr>
-                <th>ID</th>
-                <th>NAME</th>
-                <th>PRICE</th>
-                <th>CATEGORY</th>
-                <th>BRAND</th>
-                <th>ACTIONS</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Category</th>
+                <th>Brand</th>
+                <th>Count</th>
+                <th>Rating</th>
+                <th>Last updated at</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
               {products.map((product) => (
                 <tr key={product._id}>
-                  <td>{product._id}</td>
                   <td>{product.name}</td>
                   <td>{product.price}</td>
                   <td>{product.category}</td>
                   <td>{product.brand}</td>
+                  <td>{product.countInStock}</td>
+                  <td>{product.rating}</td>
+                  <td>
+                    <Badge bg="success">
+                      {product.updatedAt.substring(0, 10)}
+                    </Badge>
+                  </td>
                   <td>
                     <Button
                       type="button"

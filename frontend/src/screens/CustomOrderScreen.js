@@ -33,7 +33,6 @@ export default function CustomOrderScreen() {
       const { data } = await Axios.post(`/api/customorders`, {
         name,
         category,
-
         description,
         image,
         price,
