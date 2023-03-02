@@ -7,6 +7,8 @@ import MessageBox from "../components/MessageBox";
 import { Store } from "../Store";
 import { getError } from "../utils";
 import Button from "react-bootstrap/esm/Button";
+import Table from "react-bootstrap/Table";
+import Badge from "react-bootstrap/Badge";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -56,43 +58,62 @@ export default function OrderHistoryScreen() {
       <Helmet>
         <title>Order History</title>
       </Helmet>
-      <h2>Order History</h2>
+      <h3>My Orders</h3>
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
-        <table className="table">
+        <Table hover className="table">
           <thead>
             <tr>
-              <th>ID</th>
-              <th>DATE ( Order placed )</th>
-              <th>TOTAL</th>
-              <th>PAID</th>
-              <th>DELIVERED</th>
-              <th>EVENT DATE</th>
-              <th>EVENT TIME</th>
-              <th>ACTIONS</th>
+              <th>Ordered Packages</th>
+              <th>Date ( Order placed )</th>
+              <th>Total</th>
+              <th>Paid on</th>
+              <th>Deliverd on</th>
+              <th>Event Date</th>
+              <th>Event Time</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
             {orders.map((order) => (
               <tr key={order._id}>
-                <td>{order._id}</td>
+                <td>
+                  <ul>
+                    {order.orderItems.map((item) => (
+                      <li key={item._id}>{item.name}</li>
+                    ))}
+                  </ul>
+                </td>
                 <td>{order.createdAt.substring(0, 10)}</td>
                 <td>{order.totalPrice.toFixed(2)}</td>
-                <td>{order.isPaid ? order.paidAt.substring(0, 10) : "No"}</td>
-                <td>
-                  {order.isDelivered
-                    ? order.deliveredAt.substring(0, 10)
-                    : "No"}
+                <td className={order.isPaid ? "" : "not-paid"}>
+                  {order.isPaid ? (
+                    order.paidAt.substring(0, 10)
+                  ) : (
+                    <Badge pill bg="danger">
+                      Not paid
+                    </Badge>
+                  )}
+                </td>
+                <td className={order.isDelivered ? "" : "not-deliverd"}>
+                  {order.isDelivered ? (
+                    order.deliveredAt.substring(0, 10)
+                  ) : (
+                    <Badge pill bg="info">
+                      Not deliverd
+                    </Badge>
+                  )}
                 </td>
                 <td>{order.shippingAddress.date}</td>
                 <td>{order.shippingAddress.time}</td>
+
                 <td>
                   <Button
                     type="button"
-                    variant="dark"
+                    variant="outline-success"
                     onClick={() => {
                       navigate(`/order/${order._id}`);
                     }}
@@ -103,7 +124,7 @@ export default function OrderHistoryScreen() {
               </tr>
             ))}
           </tbody>
-        </table>
+        </Table>
       )}
     </div>
   );

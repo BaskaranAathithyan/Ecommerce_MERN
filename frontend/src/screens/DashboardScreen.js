@@ -72,6 +72,7 @@ export default function DashboardScreen() {
   const [showDivOrder, setShowDivOrder] = useState(false);
   const [showDivOrderMonth, setShowDivOrderMonth] = useState(false);
   const [showDivOrderYear, setShowDivOrderYear] = useState(false);
+  const [showDivOrderCity, setShowDivOrderCity] = useState(false);
 
   const handleYearSale = () => {
     setShowDiv(!showDiv);
@@ -84,6 +85,10 @@ export default function DashboardScreen() {
   };
   const handleOrderCountYear = () => {
     setShowDivOrderYear(!showDivOrderYear);
+  };
+
+  const handleOrderCity = () => {
+    setShowDivOrderCity(!showDivOrderCity);
   };
 
   return (
@@ -329,6 +334,9 @@ export default function DashboardScreen() {
                 <Button className="btnSale" onClick={handleOrderCountYear}>
                   Yearly Orders
                 </Button>
+                <Button className="btnSale" onClick={handleOrderCity}>
+                  Orders by City
+                </Button>
               </div>
             </Col>
             <Col md={5} className="chartdesign">
@@ -388,7 +396,7 @@ export default function DashboardScreen() {
                 </div>
               )}
             </Col>
-            <Col md={10}>
+            <Col md={12}>
               {showDivOrder && (
                 <div className="my-3">
                   <Row>
@@ -472,6 +480,36 @@ export default function DashboardScreen() {
                           x._id,
                           x.orders,
                         ]),
+                      ]}
+                    ></Chart>
+                  )}
+                </div>
+              )}
+            </Col>
+          </Row>
+
+          <Row>
+            <Col md={8}>
+              {showDivOrderCity && (
+                <div className="my-3">
+                  <Row>
+                    <Col md={8}>
+                      <h3>Orders by City</h3>
+                    </Col>
+                    <Col md={4}></Col>
+                  </Row>
+
+                  {summary.ordersByCity.length === 0 ? (
+                    <MessageBox>No Orders</MessageBox>
+                  ) : (
+                    <Chart
+                      width="90%"
+                      height="400px"
+                      chartType="PieChart"
+                      loader={<div>Loading Chart...</div>}
+                      data={[
+                        ["City", "Orders"],
+                        ...summary.ordersByCity.map((x) => [x._id, x.count]),
                       ]}
                     ></Chart>
                   )}

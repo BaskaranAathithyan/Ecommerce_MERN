@@ -175,8 +175,8 @@ export default function ProductListScreen() {
                 <th>Price</th>
                 <th>Category</th>
                 <th>Brand</th>
-                <th>Count in Stock</th>
                 <th>Rating</th>
+                <th>Count in Stock</th>
                 <th>Last updated at</th>
                 <th>Actions</th>
               </tr>
@@ -188,8 +188,13 @@ export default function ProductListScreen() {
                   <td>{product.price}</td>
                   <td>{product.category}</td>
                   <td>{product.brand}</td>
+
+                  <td>
+                    <Badge pill bg="warning">
+                      {product.rating} <i class="fas fa-star fa-0.25x"></i>
+                    </Badge>
+                  </td>
                   <td>{product.countInStock}</td>
-                  <td>{product.rating}</td>
                   <td>
                     <Badge pill bg="success">
                       {product.updatedAt.substring(0, 10)}
