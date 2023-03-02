@@ -171,14 +171,14 @@ export default function ProductListScreen() {
           <Table hover className="table ">
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Category</th>
-                <th>Brand</th>
-                <th>Rating</th>
-                <th>Count in Stock</th>
-                <th>Last updated at</th>
-                <th>Actions</th>
+                <th style={{ textAlign: "center" }}>Name</th>
+                <th style={{ textAlign: "center" }}>Price</th>
+                <th style={{ textAlign: "center" }}>Category</th>
+                <th style={{ textAlign: "center" }}>Brand</th>
+                <th style={{ textAlign: "center" }}>Rating</th>
+                <th style={{ textAlign: "center" }}>Count in Stock</th>
+                <th style={{ textAlign: "center" }}>Last updated at</th>
+                <th style={{ textAlign: "center" }}>Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -189,18 +189,20 @@ export default function ProductListScreen() {
                   <td>{product.category}</td>
                   <td>{product.brand}</td>
 
-                  <td>
+                  <td style={{ textAlign: "center" }}>
                     <Badge pill bg="warning">
                       {product.rating} <i class="fas fa-star fa-0.25x"></i>
                     </Badge>
                   </td>
-                  <td>{product.countInStock}</td>
-                  <td>
+                  <td style={{ textAlign: "center" }}>
+                    {product.countInStock}
+                  </td>
+                  <td style={{ textAlign: "center" }}>
                     <Badge pill bg="success">
                       {product.updatedAt.substring(0, 10)}
                     </Badge>
                   </td>
-                  <td>
+                  <td style={{ textAlign: "center" }}>
                     <Button
                       type="button"
                       variant="outline-success"

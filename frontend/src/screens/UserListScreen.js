@@ -8,6 +8,8 @@ import { getError } from "../utils";
 import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import Badge from "react-bootstrap/Badge";
+import Table from "react-bootstrap/Table";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -102,27 +104,45 @@ export default function UserListScreen() {
       ) : error ? (
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
-        <table className="table" varient="dark">
+        <Table hover className="table" varient="dark">
           <thead>
             <tr>
-              <th>ID</th>
-              <th>NAME</th>
-              <th>EMAIL</th>
-              <th>IS ADMIN</th>
-              <th>ACTIONS</th>
+              <th style={{ textAlign: "center" }}>Name</th>
+              <th style={{ textAlign: "center" }}>Email</th>
+              <th style={{ textAlign: "center" }}>Joined on</th>
+              <th style={{ textAlign: "center" }}>City</th>
+              <th style={{ textAlign: "center" }}>Mobile No</th>
+
+              <th style={{ textAlign: "center" }}>IS ADMIN</th>
+              <th style={{ textAlign: "center" }}>ACTIONS</th>
             </tr>
           </thead>
           <tbody>
             {users.map((user) => (
               <tr key={user._id}>
-                <td>{user._id}</td>
                 <td>{user.name}</td>
                 <td>{user.email}</td>
-                <td>{user.isAdmin ? "YES" : "NO"}</td>
-                <td>
+                <td style={{ textAlign: "center" }}>
+                  {user.createdAt.substring(0, 10)}
+                </td>
+                <td>{user.city}</td>
+                <td style={{ textAlign: "center" }}>{user.mobileNo}</td>
+
+                <td style={{ textAlign: "center" }}>
+                  {user.isAdmin ? (
+                    <Badge pill bg="success">
+                      Yes
+                    </Badge>
+                  ) : (
+                    <Badge pill bg="warning">
+                      No
+                    </Badge>
+                  )}
+                </td>
+                <td style={{ textAlign: "center" }}>
                   <Button
                     type="button"
-                    variant="light"
+                    variant="outline-success"
                     onClick={() => navigate(`/admin/user/${user._id}`)}
                   >
                     Edit
@@ -130,7 +150,7 @@ export default function UserListScreen() {
                   &nbsp;
                   <Button
                     type="button"
-                    variant="light"
+                    variant="outline-danger"
                     onClick={() => deleteHandler(user)}
                   >
                     Delete
@@ -139,7 +159,7 @@ export default function UserListScreen() {
               </tr>
             ))}
           </tbody>
-        </table>
+        </Table>
       )}
     </div>
   );

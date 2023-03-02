@@ -126,23 +126,35 @@ export default function OrderListScreen() {
         <Table hover className="table">
           <thead>
             <tr>
-              <th>Customer</th>
-              <th>Order placed on</th>
-              <th>Total</th>
-              <th>Payment Method</th>
-              <th>Paid on</th>
-              <th>Deliverd on</th>
-              <th>Actions</th>
+              <th style={{ textAlign: "center" }}>Customer</th>
+              <th style={{ textAlign: "center" }}>Ordered Packages</th>
+              <th style={{ textAlign: "center" }}>Order placed on</th>
+              <th style={{ textAlign: "center" }}>Total</th>
+              <th style={{ textAlign: "center" }}>Payment Method</th>
+              <th style={{ textAlign: "center" }}>Paid on</th>
+              <th style={{ textAlign: "center" }}>Deliverd on</th>
+              <th style={{ textAlign: "center" }}>Actions</th>
             </tr>
           </thead>
           <tbody>
             {orders.map((order) => (
               <tr key={order._id}>
-                <td>{order.user ? order.user.name : "DELETED USER"}</td>
-                <td>{order.createdAt.substring(0, 10)}</td>
+                <td style={{ textAlign: "center" }}>
+                  {order.user ? order.user.name : "DELETED USER"}
+                </td>
+                <td>
+                  <ul>
+                    {order.orderItems.map((item) => (
+                      <li key={item._id}>{item.name}</li>
+                    ))}
+                  </ul>
+                </td>
+                <td style={{ textAlign: "center" }}>
+                  {order.createdAt.substring(0, 10)}
+                </td>
                 <td>{order.totalPrice.toFixed(2)}</td>
 
-                <td>
+                <td style={{ textAlign: "center" }}>
                   {order.paymentMethod === "PayPal" ? (
                     <Badge bg="primary">{order.paymentMethod}</Badge>
                   ) : order.paymentMethod === "Cash On Delivery" ? (
@@ -151,7 +163,10 @@ export default function OrderListScreen() {
                     order.paymentMethod
                   )}
                 </td>
-                <td className={order.isPaid ? "" : "not-paid"}>
+                <td
+                  style={{ textAlign: "center" }}
+                  className={order.isPaid ? "" : "not-paid"}
+                >
                   {order.isPaid ? (
                     order.paidAt.substring(0, 10)
                   ) : (
@@ -161,7 +176,10 @@ export default function OrderListScreen() {
                   )}
                 </td>
 
-                <td className={order.isDelivered ? "" : "not-deliverd"}>
+                <td
+                  style={{ textAlign: "center" }}
+                  className={order.isDelivered ? "" : "not-deliverd"}
+                >
                   {order.isDelivered ? (
                     order.deliveredAt.substring(0, 10)
                   ) : (
@@ -171,7 +189,7 @@ export default function OrderListScreen() {
                   )}
                 </td>
 
-                <td>
+                <td style={{ textAlign: "center" }}>
                   <Button
                     type="button"
                     variant="outline-success"
