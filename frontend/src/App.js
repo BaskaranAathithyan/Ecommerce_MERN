@@ -37,7 +37,6 @@ import UserListScreen from "./screens/UserListScreen";
 import UserEditScreen from "./screens/UserEditScreen";
 import SupportScreen from "./screens/SupportScreen";
 import ChatBox from "./components/ChatBox";
-import CustomOrderScreen from "./screens/CustomOrderScreen";
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -199,7 +198,7 @@ function App() {
             <Route path="/order/:id" element={<OrderScreen />} />
             <Route path="/search" element={<SearchScreen />} />
             <Route path="/Aboutus" element={<AboutUsScreen />} />
-            <Route path="/customorders" element={<CustomOrderScreen />} />
+
             <Route
               path="/orderhistory"
               element={<OrderHistoryScreen />}
