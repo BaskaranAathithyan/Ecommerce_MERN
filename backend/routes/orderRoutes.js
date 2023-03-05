@@ -116,6 +116,15 @@ orderRouter.get(
       },
     ]);
 
+    const usersByCity = await User.aggregate([
+      {
+        $group: {
+          _id: "$city",
+          numUsers: { $sum: 1 },
+        },
+      },
+    ]);
+
     const dailyOrders = await Order.aggregate([
       {
         $group: {
@@ -212,6 +221,7 @@ orderRouter.get(
       productCategories,
       monthlyOrderCount,
       ordersByCity,
+      usersByCity,
       yearlyOrderCount,
     });
   })

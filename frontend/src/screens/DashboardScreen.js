@@ -73,7 +73,12 @@ export default function DashboardScreen() {
   const [showDivOrderMonth, setShowDivOrderMonth] = useState(false);
   const [showDivOrderYear, setShowDivOrderYear] = useState(false);
   const [showDivOrderCity, setShowDivOrderCity] = useState(false);
+  const [showDivCustomerCity, setShowDivCustomerCity] = useState(false);
+  const [showMonthSaleDiv, setShowMonthSaleDiv] = useState(false);
 
+  const handleMonthSale = () => {
+    setShowMonthSaleDiv(!showDiv);
+  };
   const handleYearSale = () => {
     setShowDiv(!showDiv);
   };
@@ -89,6 +94,10 @@ export default function DashboardScreen() {
 
   const handleOrderCity = () => {
     setShowDivOrderCity(!showDivOrderCity);
+  };
+
+  const handleCustomerCity = () => {
+    setShowDivCustomerCity(!showDivCustomerCity);
   };
 
   return (
@@ -221,6 +230,9 @@ export default function DashboardScreen() {
                       ["Date", "Sales"],
                       ...summary.dailyOrders.map((x) => [x._id, x.sales]),
                     ]}
+                    options={{
+                      colors: ["#FFA500"], // Set the color to orange
+                    }}
                   ></Chart>
                 )}
               </div>
@@ -262,66 +274,77 @@ export default function DashboardScreen() {
                   </div>
                 </Card.Body>
               </Card>
-              <Card className="cardDesign" onClick={handleOrder}>
-                <Card.Body>
-                  <div className="row align-items-center">
-                    <div className="col">
-                      <Card.Text style={{ fontSize: "1rem" }}>
-                        {" "}
-                        Undeliverd Orders
-                      </Card.Text>
-                      <Card.Title style={{ fontSize: "1.5rem" }}>
-                        {summary.orders && summary.users[0]
-                          ? summary.UndeliverdOrders[0].numDOrders
-                          : 0}
-                      </Card.Title>
-                    </div>
-                  </div>
-                </Card.Body>
-              </Card>
-              <Card className="cardDesign" onClick={handleOrder}>
-                <Card.Body>
-                  <div className="row align-items-center">
-                    <div className="col">
-                      <Card.Text style={{ fontSize: "1rem" }}>
-                        {" "}
-                        Unsettled Orders
-                      </Card.Text>
-                      <Card.Title style={{ fontSize: "1.5rem" }}>
-                        {summary.orders && summary.users[0]
-                          ? summary.UnPaidOrders[0].numPOrders
-                          : 0}
-                      </Card.Title>
-                    </div>
-                  </div>
-                </Card.Body>
-              </Card>
+              <Row>
+                <Col md={1}></Col>
+                <Col md={5}>
+                  <Card className="cardDesign" onClick={handleOrder}>
+                    <Card.Body>
+                      <div className="row align-items-center">
+                        <div className="col">
+                          <Card.Text style={{ fontSize: "1rem" }}>
+                            {" "}
+                            Undeliverd Orders
+                          </Card.Text>
+                          <Card.Title style={{ fontSize: "1.5rem" }}>
+                            {summary.orders && summary.users[0]
+                              ? summary.UndeliverdOrders[0].numDOrders
+                              : 0}
+                          </Card.Title>
+                        </div>
+                      </div>
+                    </Card.Body>
+                  </Card>
+                </Col>
+                <Col md={5}>
+                  <Card className="cardDesign" onClick={handleOrder}>
+                    <Card.Body>
+                      <div className="row align-items-center">
+                        <div className="col">
+                          <Card.Text style={{ fontSize: "1rem" }}>
+                            {" "}
+                            Unsettled Orders
+                          </Card.Text>
+                          <Card.Title style={{ fontSize: "1.5rem" }}>
+                            {summary.orders && summary.users[0]
+                              ? summary.UnPaidOrders[0].numPOrders
+                              : 0}
+                          </Card.Title>
+                        </div>
+                      </div>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              </Row>
             </Col>
           </Row>
           <Row>
-            <Col md={7} className="chartdesign">
-              <div className="my-3">
-                <Row>
-                  <Col md={8}>
-                    <h3>Monthly Sales</h3>
-                  </Col>
-                  <Col md={4}></Col>
-                </Row>
-
-                {summary.monthlyOrders.length === 0 ? (
-                  <MessageBox>No Sale</MessageBox>
+            <Col md={10} className="chartdesign">
+              <div className="my-3 dashboardCard">
+                <h2>Categories</h2>
+                {summary.productCategories.length === 0 ? (
+                  <MessageBox>No Category</MessageBox>
                 ) : (
                   <Chart
                     width="90%"
-                    height="300px"
-                    chartType="AreaChart"
+                    height="400px"
+                    chartType="Bar"
                     loader={<div>Loading Chart...</div>}
                     data={[
-                      ["Date", "Sales"],
-                      ...summary.monthlyOrders.map((x) => [x._id, x.sales]),
+                      ["Category", "Products"],
+                      ...summary.productCategories.map((x) => [x._id, x.count]),
                     ]}
+                    options={{
+                      colors: ["#0cbedd"], // Set the color to orange
+                    }}
                   ></Chart>
                 )}
+              </div>
+            </Col>
+            <Col md={2} className="chartdesign">
+              <div className="my-3">
+                <Button className="btnSale" onClick={handleMonthSale}>
+                  Monthly Sales
+                </Button>
                 <Button className="btnSale" onClick={handleYearSale}>
                   Yearly Sales
                 </Button>
@@ -337,32 +360,52 @@ export default function DashboardScreen() {
                 <Button className="btnSale" onClick={handleOrderCity}>
                   Orders by City
                 </Button>
+                <Button className="btnSale" onClick={handleCustomerCity}>
+                  Customers by City
+                </Button>
               </div>
             </Col>
-            <Col md={5} className="chartdesign">
-              <div className="my-3 dashboardCard">
-                <h2>Categories</h2>
-                {summary.productCategories.length === 0 ? (
-                  <MessageBox>No Category</MessageBox>
-                ) : (
-                  <Chart
-                    width="90%"
-                    height="400px"
-                    chartType="PieChart"
-                    loader={<div>Loading Chart...</div>}
-                    data={[
-                      ["Category", "Products"],
-                      ...summary.productCategories.map((x) => [x._id, x.count]),
-                    ]}
-                  ></Chart>
-                )}
-              </div>
-            </Col>
-            <Col md={3}></Col>
           </Row>
 
           <Row>
-            <Col md={10}>
+            <Col md={7}>
+              {showMonthSaleDiv && (
+                <div>
+                  <Col md={12} className="chartdesign">
+                    <div className="my-3">
+                      <Row>
+                        <Col md={8}>
+                          <h3>Monthly Sales</h3>
+                        </Col>
+                        <Col md={4}></Col>
+                      </Row>
+
+                      {summary.monthlyOrders.length === 0 ? (
+                        <MessageBox>No Sale</MessageBox>
+                      ) : (
+                        <Chart
+                          width="90%"
+                          height="300px"
+                          chartType="AreaChart"
+                          loader={<div>Loading Chart...</div>}
+                          data={[
+                            ["Date", "Sales"],
+                            ...summary.monthlyOrders.map((x) => [
+                              x._id,
+                              x.sales,
+                            ]),
+                          ]}
+                          options={{
+                            colors: ["#FFA500"], // Set the color to orange
+                          }}
+                        ></Chart>
+                      )}
+                    </div>
+                  </Col>
+                </div>
+              )}
+            </Col>
+            <Col md={5}>
               {showDiv && (
                 <div>
                   <Col md={12} className="chartdesign">
@@ -421,6 +464,9 @@ export default function DashboardScreen() {
                           x.orders,
                         ]),
                       ]}
+                      options={{
+                        colors: ["#FFA500"], // Set the color to orange
+                      }}
                     ></Chart>
                   )}
                 </div>
@@ -451,6 +497,9 @@ export default function DashboardScreen() {
                           x.orders,
                         ]),
                       ]}
+                      options={{
+                        colors: ["#0cbedd"],
+                      }}
                     ></Chart>
                   )}
                 </div>
@@ -463,7 +512,6 @@ export default function DashboardScreen() {
                     <Col md={8}>
                       <h3>Yearly Orders</h3>
                     </Col>
-                    <Col md={4}></Col>
                   </Row>
 
                   {summary.yearlyOrderCount.length === 0 ? (
@@ -481,6 +529,9 @@ export default function DashboardScreen() {
                           x.orders,
                         ]),
                       ]}
+                      options={{
+                        colors: ["#0cbedd"],
+                      }}
                     ></Chart>
                   )}
                 </div>
@@ -489,7 +540,7 @@ export default function DashboardScreen() {
           </Row>
 
           <Row>
-            <Col md={8}>
+            <Col md={4}>
               {showDivOrderCity && (
                 <div className="my-3">
                   <Row>
@@ -511,6 +562,36 @@ export default function DashboardScreen() {
                         ["City", "Orders"],
                         ...summary.ordersByCity.map((x) => [x._id, x.count]),
                       ]}
+                    ></Chart>
+                  )}
+                </div>
+              )}
+            </Col>
+            <Col md={8}>
+              {showDivCustomerCity && (
+                <div className="my-3">
+                  <Row>
+                    <Col md={8}>
+                      <h3>Customers by City</h3>
+                    </Col>
+                    <Col md={4}></Col>
+                  </Row>
+
+                  {summary.usersByCity.length === 0 ? (
+                    <MessageBox>No Customers</MessageBox>
+                  ) : (
+                    <Chart
+                      width="90%"
+                      height="300px"
+                      chartType="Bar"
+                      loader={<div>Loading Chart...</div>}
+                      data={[
+                        ["City", "Customers"],
+                        ...summary.usersByCity.map((x) => [x._id, x.numUsers]),
+                      ]}
+                      options={{
+                        colors: ["#FFA500"],
+                      }}
                     ></Chart>
                   )}
                 </div>
