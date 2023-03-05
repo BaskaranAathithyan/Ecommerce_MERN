@@ -12,7 +12,6 @@ import uploadRouter from "./routes/uploadRoutes.js";
 //import CustomizedOrder from "./models/CustomOrderModel.js";
 //import customOrderRouter from "./routes/customOrderRoutes.js";
 //import customOrderRouter from "./routes/customOrderRoutes.js";
-import customOrderRouter from "./routes/customOrderRoutes.js";
 
 dotenv.config();
 
