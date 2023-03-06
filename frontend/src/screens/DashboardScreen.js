@@ -35,6 +35,10 @@ export default function DashboardScreen() {
     error: "",
   });
   const { state } = useContext(Store);
+  const [data, setData] = useState({});
+  const [currentDateTime, setCurrentDateTime] = useState(
+    new Date().toLocaleString()
+  );
   const { userInfo } = state;
 
   useEffect(() => {
@@ -52,6 +56,12 @@ export default function DashboardScreen() {
       }
     };
     fetchData();
+
+    const interval = setInterval(() => {
+      setCurrentDateTime(new Date().toLocaleString());
+    }, 1000);
+
+    return () => clearInterval(interval);
   }, [userInfo]);
 
   const handlePrint = () => {
@@ -102,7 +112,14 @@ export default function DashboardScreen() {
 
   return (
     <div className="marginAll">
-      <h2 className="dashboardCard">Welcome {userInfo.name} !</h2>
+      <Row>
+        <Col md={10}>
+          <h2 className="dashboardCard">Welcome {userInfo.name} !</h2>
+        </Col>
+        <Col md={2}>
+          <h6>{currentDateTime}</h6>
+        </Col>
+      </Row>
 
       {loading ? (
         <LoadingBox />

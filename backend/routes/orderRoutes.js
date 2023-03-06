@@ -38,6 +38,109 @@ orderRouter.post(
 );
 
 orderRouter.get(
+  "/seller",
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const productSalesByBrand = await Order.aggregate([
+      {
+        $group: {
+          _id: "$brand",
+          totalSales: { $sum: "$sales" },
+        },
+      },
+    ]);
+
+    const productBrands = await Product.aggregate([
+      {
+        $group: {
+          _id: "$brand",
+          count: { $sum: 1 },
+        },
+      },
+    ]);
+    const salesByBrand = await Order.aggregate([
+      {
+        $unwind: "$orderItems",
+      },
+      {
+        $lookup: {
+          from: "products",
+          localField: "orderItems.product",
+          foreignField: "_id",
+          as: "product",
+        },
+      },
+      {
+        $unwind: "$product",
+      },
+      {
+        $group: {
+          _id: "$product.brand",
+          sales: { $sum: "$orderItems.quantity" },
+        },
+      },
+    ]);
+
+    const brandSales = await Product.aggregate([
+      {
+        $lookup: {
+          from: "orders",
+          localField: "_id",
+          foreignField: "orderItems.product",
+          as: "orders",
+        },
+      },
+      {
+        $unwind: "$orders",
+      },
+      {
+        $group: {
+          _id: "$brand",
+          totalSales: { $sum: "$orders.totalPrice" },
+        },
+      },
+    ]);
+
+    const ordersByBrand = await Order.aggregate([
+      {
+        $lookup: {
+          from: "products",
+          localField: "orderItems.product",
+          foreignField: "_id",
+          as: "products",
+        },
+      },
+      {
+        $unwind: "$products",
+      },
+      {
+        $group: {
+          _id: "$products.brand",
+          totalSales: { $sum: "$totalPrice" },
+          orders: {
+            $push: {
+              orderId: "$_id",
+              user: "$user",
+              date: "$createdAt",
+              items: "$orderItems",
+            },
+          },
+        },
+      },
+    ]);
+
+    res.send({
+      productBrands,
+      productSalesByBrand,
+      salesByBrand,
+      brandSales,
+      ordersByBrand,
+    });
+  })
+);
+
+orderRouter.get(
   "/summary",
   isAuth,
   isAdmin,

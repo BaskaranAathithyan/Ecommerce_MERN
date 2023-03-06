@@ -37,6 +37,8 @@ import UserListScreen from "./screens/UserListScreen";
 import UserEditScreen from "./screens/UserEditScreen";
 import SupportScreen from "./screens/SupportScreen";
 import ChatBox from "./components/ChatBox";
+import AddCustomOrderForm from "./screens/AddCustomOrderForm";
+import SellerScreen from "./screens/SellerScreen";
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -149,6 +151,9 @@ function App() {
                       </LinkContainer>
                       <LinkContainer to="/admin/users">
                         <NavDropdown.Item>Users</NavDropdown.Item>
+                      </LinkContainer>
+                      <LinkContainer to="/admin/sellers">
+                        <NavDropdown.Item>Sellers</NavDropdown.Item>
                       </LinkContainer>
                       <LinkContainer to="/admin/support">
                         <NavDropdown.Item>Support</NavDropdown.Item>
@@ -281,6 +286,14 @@ function App() {
               element={
                 <AdminRoute>
                   <SupportScreen />
+                </AdminRoute>
+              }
+            ></Route>
+            <Route
+              path="/admin/sellers"
+              element={
+                <AdminRoute>
+                  <SellerScreen />
                 </AdminRoute>
               }
             ></Route>
