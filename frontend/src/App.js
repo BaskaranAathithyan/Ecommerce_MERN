@@ -203,6 +203,7 @@ function App() {
             <Route path="/order/:id" element={<OrderScreen />} />
             <Route path="/search" element={<SearchScreen />} />
             <Route path="/Aboutus" element={<AboutUsScreen />} />
+            <Route path="/customorders" element={<AddCustomOrderForm />} />
 
             <Route
               path="/orderhistory"
