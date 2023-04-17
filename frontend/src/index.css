@@ -402,3 +402,12 @@ button.thumbnail {
   background-color: #100901;
   color: #c0c0c0;
 }
+
+.tabelStyle {
+  text-decoration: none;
+  color: #000000;
+}
+
+.tabelStyle:hover {
+  color: #0cbedd;
+}

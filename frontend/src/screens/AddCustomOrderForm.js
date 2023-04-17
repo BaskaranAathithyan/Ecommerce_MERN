@@ -57,7 +57,7 @@ const CustomOrderForm = () => {
     >
       <Container className="small-container">
         <Helmet>
-          <title>SCustom order</title>
+          <title>Custom order</title>
         </Helmet>
         <h3 className="my-3">Customized Order</h3>
         <Form onSubmit={handleSubmit}>

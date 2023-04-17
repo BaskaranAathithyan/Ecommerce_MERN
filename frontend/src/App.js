@@ -21,6 +21,7 @@ import SignupScreen from "./screens/SignupScreen";
 import DashboardScreen from "./screens/DashboardScreen";
 import OrderScreen from "./screens/OrderScreen";
 import AboutUsScreen from "./screens/AboutUsScreen";
+import CustomOrderScreen from "./screens/CustomOrderScreen";
 import ProductListScreen from "./screens/ProductListScreen";
 import PaymentMethodScreen from "./screens/PaymentMethodScreen";
 import PlaceOrderScreen from "./screens/PlaceOrderScreen";
@@ -148,6 +149,9 @@ function App() {
                       </LinkContainer>
                       <LinkContainer to="/admin/orders">
                         <NavDropdown.Item>Orders</NavDropdown.Item>
+                      </LinkContainer>
+                      <LinkContainer to="/admin/customorders">
+                        <NavDropdown.Item>Custom Orders</NavDropdown.Item>
                       </LinkContainer>
                       <LinkContainer to="/admin/users">
                         <NavDropdown.Item>Users</NavDropdown.Item>
@@ -295,6 +299,14 @@ function App() {
               element={
                 <AdminRoute>
                   <SellerScreen />
+                </AdminRoute>
+              }
+            ></Route>
+            <Route
+              path="/admin/customorders"
+              element={
+                <AdminRoute>
+                  <CustomOrderScreen />
                 </AdminRoute>
               }
             ></Route>

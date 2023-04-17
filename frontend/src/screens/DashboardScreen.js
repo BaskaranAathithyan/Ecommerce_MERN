@@ -10,6 +10,8 @@ import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
 import Chart from "react-google-charts";
 import { useNavigate } from "react-router-dom";
+import Table from "react-bootstrap/Table";
+import Badge from "react-bootstrap/Badge";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -217,7 +219,26 @@ export default function DashboardScreen() {
           </Row>
 
           <Row>
-            <Col md={9} className="chartdesign">
+            <Col md={3}>
+              <Table hover className="mt-3">
+                <thead>
+                  <tr>
+                    <h5>
+                      <th>Trending Products</th>
+                    </h5>
+                  </tr>
+                </thead>
+                <tbody>
+                  {summary.topSellingProducts.map((product) => (
+                    <tr key={product._id}>
+                      <td>{product.productName}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </Table>
+            </Col>
+
+            <Col md={6} className="chartdesign">
               <div className="my-3">
                 <Row>
                   <Col md={8}>

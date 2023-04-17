@@ -309,6 +309,18 @@ orderRouter.get(
         },
       },
     ]);
+    const topSellingProducts = await Order.aggregate([
+      { $unwind: "$orderItems" },
+      {
+        $group: {
+          _id: "$orderItems.product",
+          totalSales: { $sum: "$totalPrice" },
+          productName: { $first: "$orderItems.name" },
+        },
+      },
+      { $sort: { totalSales: -1 } },
+      { $limit: 10 },
+    ]);
 
     res.send({
       users,
@@ -326,6 +338,7 @@ orderRouter.get(
       ordersByCity,
       usersByCity,
       yearlyOrderCount,
+      topSellingProducts,
     });
   })
 );

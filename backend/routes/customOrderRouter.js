@@ -5,6 +5,16 @@ import { isAuth, isAdmin } from "../utils.js";
 
 const customOrderRouter = express.Router();
 
+customOrderRouter.get(
+  "/",
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const customorders = await CustomOrder.find({});
+    res.send(customorders);
+  })
+);
+
 customOrderRouter.post(
   "/",
   expressAsyncHandler(async (req, res) => {
